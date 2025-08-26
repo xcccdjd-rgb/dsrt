@@ -1,0 +1,117 @@
+/* Global Reset */
+* {
+  margin: 0; padding: 0;
+  box-sizing: border-box;
+  font-family: 'Segoe UI', sans-serif;
+}
+
+/* Landing page */
+body.landing {
+  background: linear-gradient(135deg, #5d2eea, #00c6ff);
+  color: white;
+  text-align: center;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.hero {
+  margin-bottom: 2rem;
+}
+
+.auth-box {
+  background: rgba(255,255,255,0.1);
+  padding: 2rem;
+  border-radius: 1rem;
+  max-width: 300px;
+  margin: auto;
+  backdrop-filter: blur(10px);
+}
+
+.auth-box input {
+  width: 100%;
+  padding: 0.8rem;
+  margin: 0.5rem 0;
+  border: none;
+  border-radius: 0.5rem;
+}
+
+.auth-box button {
+  width: 100%;
+  padding: 0.8rem;
+  margin-top: 0.5rem;
+  background: #fff;
+  color: #333;
+  font-weight: bold;
+  border: none;
+  border-radius: 0.5rem;
+  cursor: pointer;
+}
+
+.auth-links {
+  margin-top: 1rem;
+}
+
+/* App Page */
+body.app {
+  display: flex;
+  height: 100vh;
+}
+
+.sidebar {
+  background: #1f1f1f;
+  color: white;
+  display: flex;
+  flex-direction: column;
+  padding: 1rem;
+  width: 200px;
+}
+
+.sidebar .tab {
+  background: transparent;
+  border: none;
+  color: #ccc;
+  text-align: left;
+  padding: 0.8rem;
+  cursor: pointer;
+  border-radius: 0.5rem;
+  margin-bottom: 0.5rem;
+  transition: background 0.3s;
+}
+
+.sidebar .tab:hover,
+.sidebar .tab.active {
+  background: #5d2eea;
+  color: white;
+}
+
+.workspace {
+  flex: 1;
+  padding: 2rem;
+  background: #f7f7f7;
+}
+
+.content {
+  display: none;
+  font-size: 1.2rem;
+}
+
+.content.active {
+  display: block;
+}
+
+/* Responsive */
+@media(max-width: 768px) {
+  body.app {
+    flex-direction: column;
+  }
+  .sidebar {
+    flex-direction: row;
+    width: 100%;
+    justify-content: space-around;
+  }
+  .workspace {
+    padding: 1rem;
+  }
+}
