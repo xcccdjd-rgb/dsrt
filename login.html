@@ -1,33 +1,39 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>Login — DSRT</title>
-  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="style.css">
 </head>
-<body class="page-auth">
+<body>
   <header class="topbar">
     <div class="brand">DSRT</div>
-    <nav class="actions">
+    <div class="top-actions">
       <a class="btn ghost" href="index.html">Beranda</a>
-    </nav>
+    </div>
   </header>
 
-  <main class="auth-wrap">
-    <form id="loginForm" class="auth-card">
+  <main class="auth-wrap" role="main">
+    <form id="loginForm" class="auth-card" aria-label="Login form">
       <h2>Masuk ke DSRT</h2>
-      <label>Email</label>
-      <input id="email" type="email" placeholder="you@email.com" required />
-      <label>Password</label>
-      <input id="password" type="password" placeholder="••••••••" required />
-      <button class="btn primary lg" type="submit">Login</button>
-      <div class="auth-links">
-        <a href="#" onclick="alert('Register (demo)');return false;">Register</a>
-        <span>•</span>
-        <a href="#" onclick="alert('Forgot password (demo)');return false;">Forgot?</a>
+
+      <label for="email">Email</label>
+      <input id="email" type="email" placeholder="nama@email.com" required>
+
+      <label for="password">Password</label>
+      <input id="password" type="password" placeholder="••••••••" required>
+
+      <div style="margin-top:12px;display:flex;gap:8px;justify-content:center">
+        <button class="btn primary" type="submit">Masuk</button>
+        <a class="btn ghost" href="#" onclick="alert('Demo: registrasi belum aktif');return false">Daftar</a>
       </div>
-      <p class="hint">Demo akun: <b>fengbayu@gmail.com</b> / <b>kakanda</b></p>
+
+      <div class="auth-links" style="margin-top:12px;text-align:center;">
+        <a href="#" onclick="alert('Reset password (demo)');return false">Lupa password?</a>
+      </div>
+
+      <p class="hint">Demo akun: <strong>fengbayu@gmail.com</strong> / <strong>kakanda</strong></p>
     </form>
   </main>
 
