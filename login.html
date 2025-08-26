@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Login — DSRT</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body class="page-auth">
+  <header class="topbar">
+    <div class="brand">DSRT</div>
+    <nav class="actions">
+      <a class="btn ghost" href="index.html">Beranda</a>
+    </nav>
+  </header>
+
+  <main class="auth-wrap">
+    <form id="loginForm" class="auth-card">
+      <h2>Masuk ke DSRT</h2>
+      <label>Email</label>
+      <input id="email" type="email" placeholder="you@email.com" required />
+      <label>Password</label>
+      <input id="password" type="password" placeholder="••••••••" required />
+      <button class="btn primary lg" type="submit">Login</button>
+      <div class="auth-links">
+        <a href="#" onclick="alert('Register (demo)');return false;">Register</a>
+        <span>•</span>
+        <a href="#" onclick="alert('Forgot password (demo)');return false;">Forgot?</a>
+      </div>
+      <p class="hint">Demo akun: <b>fengbayu@gmail.com</b> / <b>kakanda</b></p>
+    </form>
+  </main>
+
+  <script src="script.js"></script>
+</body>
+</html>
