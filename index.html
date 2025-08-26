@@ -9,75 +9,91 @@
     body {
       margin: 0;
       padding: 0;
+      height: 100vh;
+      background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
       overflow-x: hidden;
     }
-    .hero {
+    .background-3d {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      background: radial-gradient(circle, rgba(255,255,255,0.1) 1px, transparent 1px);
+      background-size: 40px 40px;
+      z-index: 0;
+      animation: moveBackground 20s linear infinite;
+    }
+    @keyframes moveBackground {
+      from { background-position: 0 0; }
+      to { background-position: 100% 100%; }
+    }
+    .overlay {
       position: relative;
-      height: 100vh;
-      background: linear-gradient(to bottom right, #1f2937, #111827);
+      z-index: 1;
+      height: 100%;
       display: flex;
-      justify-content: center;
-      align-items: center;
       flex-direction: column;
+      align-items: center;
+      justify-content: center;
       text-align: center;
       color: white;
     }
-    .glass-box {
-      background: rgba(255, 255, 255, 0.15);
-      border: 1px solid rgba(255, 255, 255, 0.3);
+    .transparent-box {
+      border: 2px solid rgba(255, 255, 255, 0.3);
       padding: 20px 40px;
       border-radius: 12px;
-      backdrop-filter: blur(8px);
-      box-shadow: 0 4px 30px rgba(0,0,0,0.5);
+      background: rgba(255, 255, 255, 0.05);
+      backdrop-filter: blur(5px);
     }
   </style>
 </head>
-<body class="bg-gray-900 text-white">
-
-  <!-- HERO SECTION -->
-  <section class="hero">
-    <div class="glass-box">
-      <h1 class="text-5xl md:text-6xl font-bold tracking-wide">DSRT</h1>
-      <p class="text-lg md:text-xl mt-2">Digital Smart Revise Technology</p>
+<body>
+  <!-- Hero Section -->
+  <div class="background-3d"></div>
+  <div class="overlay">
+    <div class="transparent-box">
+      <h1 class="text-5xl font-bold mb-4">DSRT</h1>
+      <p class="text-lg">Digital Smart Revise Technology</p>
     </div>
-    <div class="mt-8">
-      <button class="bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-lg text-lg shadow-lg transition">
-        Pelajari Lebih Lanjut
-      </button>
+  </div>
+
+  <!-- CTA Section -->
+  <section class="relative z-10 bg-gray-900 text-white py-12 text-center">
+    <h2 class="text-3xl font-bold mb-4">Mulai Bersama DSRT Sekarang</h2>
+    <p class="mb-6 text-gray-300">Tingkatkan produktivitas dan kembangkan ide Anda dengan teknologi pintar kami.</p>
+    <button class="bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-lg shadow-lg">Daftar Sekarang</button>
+  </section>
+
+  <!-- Fitur Unggulan Section -->
+  <section class="relative z-10 bg-gray-800 text-white py-16">
+    <div class="container mx-auto px-6 text-center">
+      <h2 class="text-3xl font-bold mb-8">Fitur Unggulan</h2>
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+        <div class="p-6 bg-gray-700 rounded-lg shadow-md">
+          <h3 class="text-xl font-semibold mb-2">Keamanan Tinggi</h3>
+          <p class="text-gray-300">Data Anda terlindungi dengan enkripsi tingkat lanjut.</p>
+        </div>
+        <div class="p-6 bg-gray-700 rounded-lg shadow-md">
+          <h3 class="text-xl font-semibold mb-2">Integrasi Cepat</h3>
+          <p class="text-gray-300">Integrasi mudah dengan berbagai platform dan API.</p>
+        </div>
+        <div class="p-6 bg-gray-700 rounded-lg shadow-md">
+          <h3 class="text-xl font-semibold mb-2">Dukungan 24/7</h3>
+          <p class="text-gray-300">Tim kami siap membantu kapan saja.</p>
+        </div>
+      </div>
     </div>
   </section>
 
-  <!-- FITUR UNGGULAN -->
-  <section class="py-16 bg-gray-800 text-center">
-    <h2 class="text-3xl md:text-4xl font-bold mb-8">Fitur Unggulan</h2>
-    <div class="grid grid-cols-1 md:grid-cols-3 gap-8 px-8">
-      <div class="p-6 bg-gray-700 rounded-xl shadow-lg">
-        <h3 class="text-xl font-semibold mb-4">Kecepatan Tinggi</h3>
-        <p>Proses cepat dan efisien dengan teknologi modern.</p>
-      </div>
-      <div class="p-6 bg-gray-700 rounded-xl shadow-lg">
-        <h3 class="text-xl font-semibold mb-4">Keamanan Terjamin</h3>
-        <p>Sistem terenkripsi untuk menjaga privasi dan keamanan data Anda.</p>
-      </div>
-      <div class="p-6 bg-gray-700 rounded-xl shadow-lg">
-        <h3 class="text-xl font-semibold mb-4">Mudah Digunakan</h3>
-        <p>Antarmuka yang ramah pengguna untuk pengalaman terbaik.</p>
-      </div>
-    </div>
-  </section>
-
-  <!-- TENTANG KAMI -->
-  <section class="py-16 bg-gray-900 text-center">
-    <h2 class="text-3xl md:text-4xl font-bold mb-6">Tentang Kami</h2>
-    <div class="max-w-3xl mx-auto px-6">
-      <p class="text-lg leading-relaxed text-gray-300">
-        DSRT (Digital Smart Revise Technology) adalah platform inovatif yang dirancang 
-        untuk membantu Anda bekerja lebih cepat, lebih aman, dan lebih cerdas. 
-        Kami menggabungkan teknologi modern dengan desain intuitif untuk mendukung 
-        produktivitas dan efisiensi Anda.
+  <!-- Tentang Kami Section -->
+  <section class="relative z-10 bg-gray-900 text-white py-16">
+    <div class="container mx-auto px-6 text-center">
+      <h2 class="text-3xl font-bold mb-4">Tentang Kami</h2>
+      <p class="text-gray-300 max-w-2xl mx-auto">
+        DSRT adalah platform teknologi pintar yang dirancang untuk membantu bisnis dan individu
+        mengoptimalkan ide, data, dan proses kerja mereka. Dengan inovasi terbaru, kami berkomitmen
+        menghadirkan solusi yang cepat, aman, dan efisien.
       </p>
     </div>
   </section>
-
 </body>
 </html>
