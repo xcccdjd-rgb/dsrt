@@ -1,56 +1,38 @@
 <!DOCTYPE html>
-<html lang="id">
+<html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>DSRT - App</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta charset="UTF-8" />
+  <title>DSRT Editor</title>
   <style>
-    body{margin:0;font-family:sans-serif;background:#0E1429;color:#fff;height:100vh;display:flex;flex-direction:column}
-    header{padding:10px 16px;background:rgba(255,255,255,.05);display:flex;justify-content:space-between;align-items:center}
-    .app{flex:1;display:grid;grid-template-columns:200px 1fr 260px}
-    .sidebar,.rightbar{background:rgba(255,255,255,.04);padding:14px;overflow:auto}
-    .canvas{display:flex;align-items:center;justify-content:center;background:#111731}
-    .artboard{width:80%;height:70%;border:2px dashed #39406b;border-radius:12px;display:flex;align-items:center;justify-content:center;color:#9fb0ff}
-    .tool{padding:8px;margin-bottom:6px;border-radius:6px;cursor:pointer}
-    .tool:hover{background:rgba(255,255,255,.1)}
-    h3{margin-top:0}
+    body { margin:0; font-family: Arial, sans-serif; display:flex; height:100vh; }
+    nav { width:200px; background:#222; color:#fff; padding:20px; }
+    nav h2 { font-size:18px; }
+    nav a { display:block; margin:10px 0; color:#fff; text-decoration:none; }
+    nav a:hover { text-decoration:underline; }
+    main { flex:1; padding:20px; background:#f9f9f9; }
+    header { display:flex; justify-content:space-between; align-items:center; }
+    header h1 { font-size:20px; }
+    .workspace { margin-top:20px; padding:20px; background:#fff; border-radius:10px; box-shadow:0 0 5px rgba(0,0,0,0.1); }
   </style>
 </head>
 <body>
-  <header>
-    <div>DSRT Editor</div>
-    <button onclick="logout()">Keluar</button>
-  </header>
-  <div class="app">
-    <aside class="sidebar">
-      <h3>Tools</h3>
-      <div class="tool">✂️ Crop</div>
-      <div class="tool">🎚️ Adjust</div>
-      <div class="tool">🖌️ Brush</div>
-      <div class="tool">🔤 Text</div>
-      <div class="tool">🎨 Filters</div>
-      <h3>AI</h3>
-      <div class="tool">🪄 Remove BG</div>
-      <div class="tool">✨ AI Enhance</div>
-      <div class="tool">👤 Retouch</div>
-    </aside>
-    <main class="canvas">
-      <div class="artboard">Canvas Area (Tarik gambar/video)</div>
-    </main>
-    <aside class="rightbar">
-      <h3>Pengaturan</h3>
-      <p>Brightness</p>
-      <input type="range" min="0" max="100">
-      <p>Contrast</p>
-      <input type="range" min="0" max="100">
-      <p>Saturation</p>
-      <input type="range" min="0" max="100">
-    </aside>
-  </div>
-  <script>
-    const user=localStorage.getItem('dsrt_user');
-    if(!user){ location.href="landing.html"; }
-    function logout(){ localStorage.removeItem('dsrt_user'); location.href="landing.html"; }
-  </script>
+  <nav>
+    <h2>DSRT Menu</h2>
+    <a href="#">Home</a>
+    <a href="#">Filters</a>
+    <a href="#">Tools</a>
+    <a href="#">Export</a>
+    <a href="landing.html">Logout</a>
+  </nav>
+  <main>
+    <header>
+      <h1>Workspace</h1>
+      <span>User: fengbayu@gmail.com</span>
+    </header>
+    <div class="workspace">
+      <p>🎨 Editor demo ala Adobe & PicsArt.</p>
+      <p>Fitur seperti filter, layer, AI tools, dll bisa ditambahkan di sini.</p>
+    </div>
+  </main>
 </body>
 </html>
