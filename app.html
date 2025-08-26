@@ -1,143 +1,217 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>DSRT — Dashboard</title>
-  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="style.css">
 </head>
-<body class="page-app">
+<body>
   <header class="topbar">
     <div class="brand">DSRT</div>
-    <div class="searchbar">
-      <input id="featureSearch" type="search" placeholder="Cari fitur (mis. remove bg, color grade)..." />
+
+    <div class="searchbar" style="flex:1;display:flex;justify-content:center">
+      <input id="featureSearch" type="search" placeholder="Cari fitur — mis. remove bg, color grade..." />
     </div>
-    <nav class="actions">
+
+    <div class="top-actions">
       <span class="user">👤 fengbayu@gmail.com</span>
       <a class="btn ghost" href="index.html">Logout</a>
-    </nav>
+    </div>
   </header>
 
   <main class="app-main">
-    <!-- Tabs -->
-    <div class="tabs">
-      <button class="tab active" data-target="adobe">Adobe Tools</button>
-      <button class="tab" data-target="picsart">PicsArt Tools</button>
-      <button class="tab" data-target="cloud">Cloud & Pengaturan</button>
-    </div>
+    <aside class="sidebar" id="sidebar">
+      <div class="side-section">
+        <div class="side-title">MANUAL (Adobe-style)</div>
+        <div class="side-item active" data-target="adobe">Photo & Video Tools</div>
+        <div class="side-item" data-target="retouch">Retouch & Local</div>
+        <div class="side-item" data-target="video">Video Tools</div>
+      </div>
 
-    <!-- Adobe-like -->
-    <section id="adobe" class="cards grid active">
-      <!-- Foto / Gambar -->
-      <article class="card feature" data-name="Lightroom (Color Grade)">
-        <div class="ic">🎚️</div><h4>Lightroom (Color Grade)</h4><p>Exposure, white balance, tone curve, HSL.</p>
-      </article>
-      <article class="card feature" data-name="Photoshop (Layers & Mask)">
-        <div class="ic">🧱</div><h4>Photoshop (Layers & Mask)</h4><p>Layer, masking, blend modes.</p>
-      </article>
-      <article class="card feature" data-name="Healing & Clone">
-        <div class="ic">🩹</div><h4>Healing & Clone</h4><p>Spot heal, clone stamp.</p>
-      </article>
-      <article class="card feature" data-name="Liquify">
-        <div class="ic">🌊</div><h4>Liquify</h4><p>Bentuk ulang bagian foto secara halus.</p>
-      </article>
-      <article class="card feature" data-name="Crop & Transform">
-        <div class="ic">✂️</div><h4>Crop & Transform</h4><p>Crop, rotate, perspective, straighten.</p>
-      </article>
-      <article class="card feature" data-name="Sharpen & Noise">
-        <div class="ic">🔎</div><h4>Sharpen & Noise</h4><p>Detail, de-noise, clarity, texture.</p>
-      </article>
-      <article class="card feature" data-name="Curves & Levels">
-        <div class="ic">📈</div><h4>Curves & Levels</h4><p>Kendali tonal lanjutan.</p>
-      </article>
-      <article class="card feature" data-name="Selective Color">
-        <div class="ic">🎯</div><h4>Selective Color</h4><p>Ubah satu warna tanpa pengaruh lain.</p>
-      </article>
-      <article class="card feature" data-name="Text Tool Pro">
-        <div class="ic">🔤</div><h4>Text Tool Pro</h4><p>Font, kerning, warp text.</p>
-      </article>
-      <article class="card feature" data-name="Vector & Pen Tool">
-        <div class="ic">✒️</div><h4>Vector & Pen Tool</h4><p>Buat bentuk vektor presisi.</p>
-      </article>
-      <!-- Video -->
-      <article class="card feature" data-name="Premiere (Timeline)">
-        <div class="ic">🎞️</div><h4>Premiere (Timeline)</h4><p>Cut/trim, ripple, speed ramp.</p>
-      </article>
-      <article class="card feature" data-name="Transitions & LUT">
-        <div class="ic">🔁</div><h4>Transitions & LUT</h4><p>Transisi modern, LUT color.</p>
-      </article>
-      <article class="card feature" data-name="After Effects (Keyframe)">
-        <div class="ic">✨</div><h4>After Effects (Keyframe)</h4><p>Animasi, motion blur, easing.</p>
-      </article>
-      <article class="card feature" data-name="Audio Editor (EQ/NR)">
-        <div class="ic">🎧</div><h4>Audio Editor (EQ/NR)</h4><p>Equalizer, noise reduction.</p>
-      </article>
-    </section>
+      <div class="side-section">
+        <div class="side-title">CREATIVE (PicsArt-style)</div>
+        <div class="side-item" data-target="ai">AI Filters & Auto</div>
+        <div class="side-item" data-target="templates">Templates & Collage</div>
+        <div class="side-item" data-target="stickers">Stickers & Overlays</div>
+      </div>
 
-    <!-- PicsArt-like -->
-    <section id="picsart" class="cards grid">
-      <article class="card feature" data-name="AI Filters">
-        <div class="ic">🤖</div><h4>AI Filters</h4><p>Toon, sketch, anime, cinematic.</p>
-      </article>
-      <article class="card feature" data-name="Remove Background">
-        <div class="ic">🪄</div><h4>Remove Background</h4><p>Hapus latar otomatis sekali klik.</p>
-      </article>
-      <article class="card feature" data-name="Magic Effects">
-        <div class="ic">🪬</div><h4>Magic Effects</h4><p>Bokeh, dispersion, glitch.</p>
-      </article>
-      <article class="card feature" data-name="Beautify (Retouch)">
-        <div class="ic">💄</div><h4>Beautify (Retouch)</h4><p>Smoothing, whiten, reshape.</p>
-      </article>
-      <article class="card feature" data-name="Sticker & Overlay">
-        <div class="ic">🏷️</div><h4>Sticker & Overlay</h4><p>Sticker, frame, overlay cahaya.</p>
-      </article>
-      <article class="card feature" data-name="Templates & Collage">
-        <div class="ic">🧩</div><h4>Templates & Collage</h4><p>Grid, freestyle, poster.</p>
-      </article>
-      <article class="card feature" data-name="Text Art & Fonts">
-        <div class="ic">🅰️</div><h4>Text Art & Fonts</h4><p>Font artistik, stroke, shadow.</p>
-      </article>
-      <article class="card feature" data-name="AI Remove Object">
-        <div class="ic">🧽</div><h4>AI Remove Object</h4><p>Hilangkan objek mengganggu.</p>
-      </article>
-    </section>
+      <div class="side-section">
+        <div class="side-title">CLOUD & SETTINGS</div>
+        <div class="side-item" data-target="cloud">Cloud Projects</div>
+        <div class="side-item" data-target="export">Export & Share</div>
+        <div class="side-item" data-target="settings">Preferences</div>
+      </div>
+    </aside>
 
-    <!-- Cloud & Settings -->
-    <section id="cloud" class="cards grid">
-      <article class="card feature" data-name="Cloud Projects">
-        <div class="ic">☁️</div><h4>Cloud Projects</h4><p>Simpan & sinkron lintas perangkat.</p>
-      </article>
-      <article class="card feature" data-name="Version History">
-        <div class="ic">🕓</div><h4>Version History</h4><p>Riwayat edit & rollback.</p>
-      </article>
-      <article class="card feature" data-name="Share & Publish">
-        <div class="ic">📤</div><h4>Share & Publish</h4><p>Ekspor cepat ke sosial media.</p>
-      </article>
-      <article class="card feature" data-name="Preset Marketplace">
-        <div class="ic">🛍️</div><h4>Preset Marketplace</h4><p>Jelajah & pasang preset.</p>
-      </article>
-      <article class="card feature" data-name="Theme & Accessibility">
-        <div class="ic">🎨</div><h4>Theme & Accessibility</h4><p>Dark/light, ukuran UI.</p>
-      </article>
-      <article class="card feature" data-name="Security (2FA)">
-        <div class="ic">🔐</div><h4>Security (2FA)</h4><p>Autentikasi dua langkah.</p>
-      </article>
+    <section class="workspace" id="workspace">
+      <div class="workspace-top">
+        <h2 id="workspaceTitle">Photo & Video Tools</h2>
+        <div style="display:flex;gap:8px">
+          <button class="btn ghost" id="collapseSidebar">Toggle</button>
+          <button class="btn primary" onclick="alert('Simulasi: create new project')">New Project</button>
+        </div>
+      </div>
+
+      <!-- Adobe Tab -->
+      <div class="cards grid" id="adobe">
+        <!-- many features: Adobe-like -->
+        <div class="feature-card feature" data-name="Lightroom - Color Grade">
+          <div class="title">Lightroom — Color Grade</div>
+          <div class="sub">Exposure, White balance, Tone curve, HSL</div>
+        </div>
+        <div class="feature-card feature" data-name="Crop & Transform">
+          <div class="title">Crop & Transform</div><div class="sub">Crop, rotate, perspective</div>
+        </div>
+        <div class="feature-card feature" data-name="Curves & Levels">
+          <div class="title">Curves & Levels</div><div class="sub">Tonal control & RGB curves</div>
+        </div>
+        <div class="feature-card feature" data-name="Selective Color">
+          <div class="title">Selective Color</div><div class="sub">Target single color adjustments</div>
+        </div>
+        <div class="feature-card feature" data-name="Layers & Masking">
+          <div class="title">Layers & Masking</div><div class="sub">Blend, mask, group layers</div>
+        </div>
+        <div class="feature-card feature" data-name="Healing & Clone">
+          <div class="title">Healing & Clone</div><div class="sub">Spot removal & clone stamp</div>
+        </div>
+        <div class="feature-card feature" data-name="Brush Tool">
+          <div class="title">Brush Tool</div><div class="sub">Local adjustments & painting</div>
+        </div>
+        <div class="feature-card feature" data-name="Sharpen & Denoise">
+          <div class="title">Sharpen & Denoise</div><div class="sub">Clarity, detail, noise reduction</div>
+        </div>
+        <div class="feature-card feature" data-name="Text Tool Pro">
+          <div class="title">Text Tool Pro</div><div class="sub">Fonts, kerning, text effects</div>
+        </div>
+        <div class="feature-card feature" data-name="Vector Pen Tool">
+          <div class="title">Vector & Pen Tool</div><div class="sub">Create shapes & paths</div>
+        </div>
+
+        <!-- Video tools -->
+        <div class="feature-card feature" data-name="Timeline Editor">
+          <div class="title">Timeline Editor</div><div class="sub">Cut, ripple, multi-track</div>
+        </div>
+        <div class="feature-card feature" data-name="Transitions & LUTs">
+          <div class="title">Transitions & LUTs</div><div class="sub">Smooth transitions & LUT apply</div>
+        </div>
+        <div class="feature-card feature" data-name="Keyframe Animation">
+          <div class="title">Keyframe Animation</div><div class="sub">Motion, easing & graph editor</div>
+        </div>
+        <div class="feature-card feature" data-name="Audio Editor">
+          <div class="title">Audio Editor</div><div class="sub">EQ, noise reduction, normalize</div>
+        </div>
+      </div>
+
+      <!-- Retouch tab (hidden by default) -->
+      <div class="cards grid" id="retouch" style="display:none">
+        <div class="feature-card feature" data-name="Liquify">
+          <div class="title">Liquify</div><div class="sub">Reshape & warp</div>
+        </div>
+        <div class="feature-card feature" data-name="Portrait Retouch">
+          <div class="title">Portrait Retouch</div><div class="sub">Skin smoothing, eyes, teeth</div>
+        </div>
+        <div class="feature-card feature" data-name="Frequency Separation">
+          <div class="title">Frequency Separation</div><div class="sub">Advanced skin retouch workflow</div>
+        </div>
+      </div>
+
+      <!-- Video tab -->
+      <div class="cards grid" id="video" style="display:none">
+        <div class="feature-card feature" data-name="MultiCam Edit">
+          <div class="title">MultiCam Edit</div><div class="sub">Sync & switch cameras</div>
+        </div>
+        <div class="feature-card feature" data-name="Speed Ramping">
+          <div class="title">Speed Ramping</div><div class="sub">Smooth speed changes</div>
+        </div>
+      </div>
+
+      <!-- AI / PicsArt -->
+      <div class="cards grid" id="ai" style="display:none">
+        <div class="feature-card feature" data-name="AI Filters">
+          <div class="title">AI Filters</div><div class="sub">Cinematic, Painterly, Anime</div>
+        </div>
+        <div class="feature-card feature" data-name="Remove Background">
+          <div class="title">Remove Background</div><div class="sub">One-click BG removal</div>
+        </div>
+        <div class="feature-card feature" data-name="AI Remove Object">
+          <div class="title">AI Remove Object</div><div class="sub">Smart content aware removal</div>
+        </div>
+        <div class="feature-card feature" data-name="Magic Effects">
+          <div class="title">Magic Effects</div><div class="sub">Dispersion, glow, glitch</div>
+        </div>
+        <div class="feature-card feature" data-name="Beautify">
+          <div class="title">Beautify</div><div class="sub">Face retouch & automatic corrections</div>
+        </div>
+        <div class="feature-card feature" data-name="Style Transfer">
+          <div class="title">Style Transfer</div><div class="sub">Apply painterly styles</div>
+        </div>
+      </div>
+
+      <!-- Templates -->
+      <div class="cards grid" id="templates" style="display:none">
+        <div class="feature-card feature" data-name="Collage Maker">
+          <div class="title">Collage Maker</div><div class="sub">Grid & freestyle templates</div>
+        </div>
+        <div class="feature-card feature" data-name="Poster Templates">
+          <div class="title">Poster Templates</div><div class="sub">Prebuilt social templates</div>
+        </div>
+      </div>
+
+      <!-- stickers -->
+      <div class="cards grid" id="stickers" style="display:none">
+        <div class="feature-card feature" data-name="Sticker Library">
+          <div class="title">Sticker Library</div><div class="sub">Trending sticker packs</div>
+        </div>
+        <div class="feature-card feature" data-name="Overlay Light FX">
+          <div class="title">Overlay Light FX</div><div class="sub">Light leaks, bokeh overlays</div>
+        </div>
+      </div>
+
+      <!-- cloud -->
+      <div class="cards grid" id="cloud" style="display:none">
+        <div class="feature-card feature" data-name="Cloud Projects">
+          <div class="title">Cloud Projects</div><div class="sub">Auto save & multi device</div>
+        </div>
+        <div class="feature-card feature" data-name="Version History">
+          <div class="title">Version History</div><div class="sub">Revert & timeline</div>
+        </div>
+      </div>
+
+      <div class="cards grid" id="export" style="display:none">
+        <div class="feature-card feature" data-name="Export Presets">
+          <div class="title">Export Presets</div><div class="sub">JPEG, PNG, MP4, WebP</div>
+        </div>
+        <div class="feature-card feature" data-name="Share to Social">
+          <div class="title">Share to Social</div><div class="sub">One click share</div>
+        </div>
+      </div>
+
+      <div class="cards grid" id="settings" style="display:none">
+        <div class="feature-card">
+          <div class="title">Theme</div><div class="sub">Dark / Light / Auto</div>
+        </div>
+        <div class="feature-card">
+          <div class="title">Security</div><div class="sub">2FA & account</div>
+        </div>
+      </div>
+
     </section>
   </main>
 
-  <!-- Modal detail fitur -->
-  <div id="featureModal" class="modal">
-    <div class="modal-box">
-      <button class="close" aria-label="Close">✖</button>
-      <h3 id="modalTitle">Fitur</h3>
-      <p id="modalDesc">Deskripsi singkat. (Demo UI — fungsi lanjutan bisa dihubungkan ke API nantinya.)</p>
+  <!-- modal detail -->
+  <div class="modal" id="featureModal" aria-hidden="true">
+    <div class="modal-box" role="dialog" aria-modal="true">
+      <button class="close" style="float:right;border:0;background:transparent;color:#fff;font-size:18px;cursor:pointer">✖</button>
+      <h3 id="modalTitle">Feature</h3>
+      <p id="modalDesc" style="color:var(--muted)">Detail feature description...</p>
       <div class="modal-actions">
-        <button class="btn ghost" onclick="alert('Preview (demo)')">Preview</button>
-        <button class="btn primary" onclick="alert('Buka editor fitur (demo)')">Buka Editor</button>
+        <button class="btn ghost" onclick="document.getElementById('featureModal').classList.remove('show')">Tutup</button>
+        <button class="btn primary" onclick="alert('Buka editor (demo)')">Buka Editor</button>
       </div>
     </div>
   </div>
 
   <script src="script.js"></script>
 </body>
-</html>
+                                                  </html>
