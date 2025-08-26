@@ -2,37 +2,27 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>DSRT Editor</title>
-  <style>
-    body { margin:0; font-family: Arial, sans-serif; display:flex; height:100vh; }
-    nav { width:200px; background:#222; color:#fff; padding:20px; }
-    nav h2 { font-size:18px; }
-    nav a { display:block; margin:10px 0; color:#fff; text-decoration:none; }
-    nav a:hover { text-decoration:underline; }
-    main { flex:1; padding:20px; background:#f9f9f9; }
-    header { display:flex; justify-content:space-between; align-items:center; }
-    header h1 { font-size:20px; }
-    .workspace { margin-top:20px; padding:20px; background:#fff; border-radius:10px; box-shadow:0 0 5px rgba(0,0,0,0.1); }
-  </style>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>DSRT App</title>
+  <link rel="stylesheet" href="style.css" />
 </head>
-<body>
-  <nav>
-    <h2>DSRT Menu</h2>
-    <a href="#">Home</a>
-    <a href="#">Filters</a>
-    <a href="#">Tools</a>
-    <a href="#">Export</a>
-    <a href="landing.html">Logout</a>
-  </nav>
-  <main>
-    <header>
-      <h1>Workspace</h1>
-      <span>User: fengbayu@gmail.com</span>
-    </header>
-    <div class="workspace">
-      <p>🎨 Editor demo ala Adobe & PicsArt.</p>
-      <p>Fitur seperti filter, layer, AI tools, dll bisa ditambahkan di sini.</p>
-    </div>
-  </main>
+<body class="app">
+  <div class="sidebar">
+    <button class="tab active" data-target="filters">🎨 Filters</button>
+    <button class="tab" data-target="adjust">✨ Adjust</button>
+    <button class="tab" data-target="effects">🎆 Effects</button>
+    <button class="tab" data-target="text">🔤 Text</button>
+    <button class="tab" data-target="export">📤 Export</button>
+  </div>
+
+  <div class="workspace">
+    <div id="filters" class="content active">Apply amazing filters to your photos.</div>
+    <div id="adjust" class="content">Fine-tune brightness, contrast, saturation.</div>
+    <div id="effects" class="content">Add stunning effects and overlays.</div>
+    <div id="text" class="content">Insert and style text creatively.</div>
+    <div id="export" class="content">Save or share your masterpiece.</div>
+  </div>
+
+  <script src="script.js"></script>
 </body>
 </html>
