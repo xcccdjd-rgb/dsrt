@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <title>DSRT - Landing</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <style>
+    body{margin:0;font-family:sans-serif;background:linear-gradient(180deg,#0B1020,#0E1429);color:#fff}
+    .container{max-width:700px;margin:auto;padding:20px}
+    h1{font-size:42px}
+    .btn{padding:10px 16px;border:0;border-radius:8px;cursor:pointer}
+    .btn-primary{background:#fff;color:#111;font-weight:600}
+    .btn-ghost{background:transparent;color:#fff;border:1px solid #fff;margin-left:10px}
+    .auth{margin-top:40px;padding:20px;background:rgba(255,255,255,.05);border-radius:12px}
+    .field{margin-bottom:12px;display:grid}
+    .field label{font-size:14px;margin-bottom:4px}
+    .field input{padding:10px;border-radius:6px;border:1px solid #888}
+    a{color:#4ad}
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Digital Smart Revise Technology</h1>
+    <p>Platform cerdas untuk editing foto, video, dan template dengan AI modern.</p>
+    <button class="btn btn-primary" onclick="showLogin()">Login</button>
+    <button class="btn btn-ghost" onclick="showRegister()">Register</button>
+
+    <!-- LOGIN -->
+    <div class="auth" id="login" style="display:none">
+      <h2>Login</h2>
+      <div class="field">
+        <label>Email</label>
+        <input id="login-email" value="fengbayu@gmail.com">
+      </div>
+      <div class="field">
+        <label>Password</label>
+        <input id="login-pass" type="password" value="kakanda">
+      </div>
+      <button class="btn btn-primary" onclick="doLogin()">Masuk</button>
+      <p><a href="#" onclick="showForgot()">Lupa password?</a></p>
+    </div>
+
+    <!-- REGISTER -->
+    <div class="auth" id="register" style="display:none">
+      <h2>Register</h2>
+      <div class="field">
+        <label>Nama</label>
+        <input id="reg-name">
+      </div>
+      <div class="field">
+        <label>Email</label>
+        <input id="reg-email">
+      </div>
+      <div class="field">
+        <label>Password</label>
+        <input id="reg-pass" type="password">
+      </div>
+      <button class="btn btn-primary" onclick="doRegister()">Daftar</button>
+    </div>
+
+    <!-- FORGOT -->
+    <div class="auth" id="forgot" style="display:none">
+      <h2>Lupa Password</h2>
+      <div class="field">
+        <label>Email</label>
+        <input id="fg-email">
+      </div>
+      <button class="btn btn-primary" onclick="alert('Reset link dikirim (simulasi)')">Kirim</button>
+    </div>
+  </div>
+
+  <script>
+    function showLogin(){ hideAll();document.getElementById('login').style.display='block'; }
+    function showRegister(){ hideAll();document.getElementById('register').style.display='block'; }
+    function showForgot(){ hideAll();document.getElementById('forgot').style.display='block'; }
+    function hideAll(){ ['login','register','forgot'].forEach(id=>document.getElementById(id).style.display='none'); }
+
+    function doLogin(){
+      const email = document.getElementById('login-email').value;
+      const pass = document.getElementById('login-pass').value;
+      if(email && pass){
+        localStorage.setItem('dsrt_user', JSON.stringify({email}));
+        location.href = "app.html";
+      }else{
+        alert("Isi email & password");
+      }
+    }
+    function doRegister(){
+      const name=document.getElementById('reg-name').value;
+      const email=document.getElementById('reg-email').value;
+      const pass=document.getElementById('reg-pass').value;
+      if(name && email && pass){
+        localStorage.setItem('dsrt_user', JSON.stringify({name,email}));
+        location.href="app.html";
+      }else{
+        alert("Lengkapi semua data");
+      }
+    }
+
+    // 🔑 Autologin jika ada hash #autologin
+    if(location.hash === "#autologin"){
+      localStorage.setItem('dsrt_user', JSON.stringify({email:"fengbayu@gmail.com"}));
+      location.href="app.html";
+    }
+  </script>
+</body>
+</html>
