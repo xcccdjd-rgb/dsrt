@@ -1,26 +1,141 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="id">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>DSRT App</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>DSRT — Dashboard</title>
   <link rel="stylesheet" href="style.css" />
 </head>
-<body class="app">
-  <div class="sidebar">
-    <button class="tab active" data-target="filters">🎨 Filters</button>
-    <button class="tab" data-target="adjust">✨ Adjust</button>
-    <button class="tab" data-target="effects">🎆 Effects</button>
-    <button class="tab" data-target="text">🔤 Text</button>
-    <button class="tab" data-target="export">📤 Export</button>
-  </div>
+<body class="page-app">
+  <header class="topbar">
+    <div class="brand">DSRT</div>
+    <div class="searchbar">
+      <input id="featureSearch" type="search" placeholder="Cari fitur (mis. remove bg, color grade)..." />
+    </div>
+    <nav class="actions">
+      <span class="user">👤 fengbayu@gmail.com</span>
+      <a class="btn ghost" href="index.html">Logout</a>
+    </nav>
+  </header>
 
-  <div class="workspace">
-    <div id="filters" class="content active">Apply amazing filters to your photos.</div>
-    <div id="adjust" class="content">Fine-tune brightness, contrast, saturation.</div>
-    <div id="effects" class="content">Add stunning effects and overlays.</div>
-    <div id="text" class="content">Insert and style text creatively.</div>
-    <div id="export" class="content">Save or share your masterpiece.</div>
+  <main class="app-main">
+    <!-- Tabs -->
+    <div class="tabs">
+      <button class="tab active" data-target="adobe">Adobe Tools</button>
+      <button class="tab" data-target="picsart">PicsArt Tools</button>
+      <button class="tab" data-target="cloud">Cloud & Pengaturan</button>
+    </div>
+
+    <!-- Adobe-like -->
+    <section id="adobe" class="cards grid active">
+      <!-- Foto / Gambar -->
+      <article class="card feature" data-name="Lightroom (Color Grade)">
+        <div class="ic">🎚️</div><h4>Lightroom (Color Grade)</h4><p>Exposure, white balance, tone curve, HSL.</p>
+      </article>
+      <article class="card feature" data-name="Photoshop (Layers & Mask)">
+        <div class="ic">🧱</div><h4>Photoshop (Layers & Mask)</h4><p>Layer, masking, blend modes.</p>
+      </article>
+      <article class="card feature" data-name="Healing & Clone">
+        <div class="ic">🩹</div><h4>Healing & Clone</h4><p>Spot heal, clone stamp.</p>
+      </article>
+      <article class="card feature" data-name="Liquify">
+        <div class="ic">🌊</div><h4>Liquify</h4><p>Bentuk ulang bagian foto secara halus.</p>
+      </article>
+      <article class="card feature" data-name="Crop & Transform">
+        <div class="ic">✂️</div><h4>Crop & Transform</h4><p>Crop, rotate, perspective, straighten.</p>
+      </article>
+      <article class="card feature" data-name="Sharpen & Noise">
+        <div class="ic">🔎</div><h4>Sharpen & Noise</h4><p>Detail, de-noise, clarity, texture.</p>
+      </article>
+      <article class="card feature" data-name="Curves & Levels">
+        <div class="ic">📈</div><h4>Curves & Levels</h4><p>Kendali tonal lanjutan.</p>
+      </article>
+      <article class="card feature" data-name="Selective Color">
+        <div class="ic">🎯</div><h4>Selective Color</h4><p>Ubah satu warna tanpa pengaruh lain.</p>
+      </article>
+      <article class="card feature" data-name="Text Tool Pro">
+        <div class="ic">🔤</div><h4>Text Tool Pro</h4><p>Font, kerning, warp text.</p>
+      </article>
+      <article class="card feature" data-name="Vector & Pen Tool">
+        <div class="ic">✒️</div><h4>Vector & Pen Tool</h4><p>Buat bentuk vektor presisi.</p>
+      </article>
+      <!-- Video -->
+      <article class="card feature" data-name="Premiere (Timeline)">
+        <div class="ic">🎞️</div><h4>Premiere (Timeline)</h4><p>Cut/trim, ripple, speed ramp.</p>
+      </article>
+      <article class="card feature" data-name="Transitions & LUT">
+        <div class="ic">🔁</div><h4>Transitions & LUT</h4><p>Transisi modern, LUT color.</p>
+      </article>
+      <article class="card feature" data-name="After Effects (Keyframe)">
+        <div class="ic">✨</div><h4>After Effects (Keyframe)</h4><p>Animasi, motion blur, easing.</p>
+      </article>
+      <article class="card feature" data-name="Audio Editor (EQ/NR)">
+        <div class="ic">🎧</div><h4>Audio Editor (EQ/NR)</h4><p>Equalizer, noise reduction.</p>
+      </article>
+    </section>
+
+    <!-- PicsArt-like -->
+    <section id="picsart" class="cards grid">
+      <article class="card feature" data-name="AI Filters">
+        <div class="ic">🤖</div><h4>AI Filters</h4><p>Toon, sketch, anime, cinematic.</p>
+      </article>
+      <article class="card feature" data-name="Remove Background">
+        <div class="ic">🪄</div><h4>Remove Background</h4><p>Hapus latar otomatis sekali klik.</p>
+      </article>
+      <article class="card feature" data-name="Magic Effects">
+        <div class="ic">🪬</div><h4>Magic Effects</h4><p>Bokeh, dispersion, glitch.</p>
+      </article>
+      <article class="card feature" data-name="Beautify (Retouch)">
+        <div class="ic">💄</div><h4>Beautify (Retouch)</h4><p>Smoothing, whiten, reshape.</p>
+      </article>
+      <article class="card feature" data-name="Sticker & Overlay">
+        <div class="ic">🏷️</div><h4>Sticker & Overlay</h4><p>Sticker, frame, overlay cahaya.</p>
+      </article>
+      <article class="card feature" data-name="Templates & Collage">
+        <div class="ic">🧩</div><h4>Templates & Collage</h4><p>Grid, freestyle, poster.</p>
+      </article>
+      <article class="card feature" data-name="Text Art & Fonts">
+        <div class="ic">🅰️</div><h4>Text Art & Fonts</h4><p>Font artistik, stroke, shadow.</p>
+      </article>
+      <article class="card feature" data-name="AI Remove Object">
+        <div class="ic">🧽</div><h4>AI Remove Object</h4><p>Hilangkan objek mengganggu.</p>
+      </article>
+    </section>
+
+    <!-- Cloud & Settings -->
+    <section id="cloud" class="cards grid">
+      <article class="card feature" data-name="Cloud Projects">
+        <div class="ic">☁️</div><h4>Cloud Projects</h4><p>Simpan & sinkron lintas perangkat.</p>
+      </article>
+      <article class="card feature" data-name="Version History">
+        <div class="ic">🕓</div><h4>Version History</h4><p>Riwayat edit & rollback.</p>
+      </article>
+      <article class="card feature" data-name="Share & Publish">
+        <div class="ic">📤</div><h4>Share & Publish</h4><p>Ekspor cepat ke sosial media.</p>
+      </article>
+      <article class="card feature" data-name="Preset Marketplace">
+        <div class="ic">🛍️</div><h4>Preset Marketplace</h4><p>Jelajah & pasang preset.</p>
+      </article>
+      <article class="card feature" data-name="Theme & Accessibility">
+        <div class="ic">🎨</div><h4>Theme & Accessibility</h4><p>Dark/light, ukuran UI.</p>
+      </article>
+      <article class="card feature" data-name="Security (2FA)">
+        <div class="ic">🔐</div><h4>Security (2FA)</h4><p>Autentikasi dua langkah.</p>
+      </article>
+    </section>
+  </main>
+
+  <!-- Modal detail fitur -->
+  <div id="featureModal" class="modal">
+    <div class="modal-box">
+      <button class="close" aria-label="Close">✖</button>
+      <h3 id="modalTitle">Fitur</h3>
+      <p id="modalDesc">Deskripsi singkat. (Demo UI — fungsi lanjutan bisa dihubungkan ke API nantinya.)</p>
+      <div class="modal-actions">
+        <button class="btn ghost" onclick="alert('Preview (demo)')">Preview</button>
+        <button class="btn primary" onclick="alert('Buka editor fitur (demo)')">Buka Editor</button>
+      </div>
+    </div>
   </div>
 
   <script src="script.js"></script>
