@@ -23,11 +23,6 @@
     .modal {
       background: rgba(0,0,0,0.7);
       display: none;
-      align-items: center;
-      justify-content: center;
-      position: fixed;
-      inset: 0;
-      z-index: 30;
     }
     .modal.show {
       display: flex;
@@ -60,7 +55,6 @@
     <div class="max-w-7xl mx-auto px-4 text-center">
       <h2 class="text-4xl font-bold text-white mb-4">Fitur Unggulan</h2>
       <p class="text-gray-300 mb-12">Teknologi pintar untuk efisiensi dan performa maksimal.</p>
-
       <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
         <div class="bg-gray-800 rounded-2xl p-6 shadow-lg hover:shadow-xl transition">
           <div class="text-blue-400 text-5xl mb-4">⚡</div>
@@ -97,39 +91,29 @@
   </button>
 
   <!-- Modal Login -->
-  <div id="loginModal" class="modal">
+  <div id="loginModal" class="modal fixed inset-0 z-30 justify-center items-center">
     <div class="bg-gray-900 rounded-xl p-6 w-80 shadow-2xl text-center">
       <h3 class="text-xl font-bold text-indigo-400 mb-4">Login</h3>
-      <input type="text" placeholder="Username" class="w-full mb-3 px-3 py-2 rounded-md bg-gray-800 text-white focus:outline-none" />
-      <input type="password" placeholder="Password" class="w-full mb-3 px-3 py-2 rounded-md bg-gray-800 text-white focus:outline-none" />
-      <button class="w-full py-2 bg-gradient-to-r from-indigo-500 to-blue-500 rounded-md text-white font-semibold hover:opacity-90 mb-2">Masuk</button>
-      <div class="flex justify-between text-sm text-gray-400">
-        <button id="forgotBtn" class="hover:text-white">Forgot Password</button>
-        <button id="registerBtn" class="hover:text-white">Register</button>
+      <input id="usernameInput" type="text" placeholder="Username" class="w-full mb-3 px-3 py-2 rounded-md bg-gray-800 text-white focus:outline-none" />
+      <input id="passwordInput" type="password" placeholder="Password" class="w-full mb-3 px-3 py-2 rounded-md bg-gray-800 text-white focus:outline-none" />
+      <button id="loginSubmit" class="w-full py-2 bg-gradient-to-r from-indigo-500 to-blue-500 rounded-md text-white font-semibold hover:opacity-90 mb-2">Masuk</button>
+
+      <div class="flex justify-between text-sm mt-2">
+        <button id="forgotBtn" class="text-blue-400 hover:underline">Forgot Password</button>
+        <button id="registerBtn" class="text-green-400 hover:underline">Register</button>
       </div>
+
       <button id="closeModal" class="mt-3 text-gray-400 hover:text-white text-sm">Tutup</button>
     </div>
   </div>
 
-  <!-- Modal Forgot Password -->
-  <div id="forgotModal" class="modal">
+  <!-- Modal Reset Password -->
+  <div id="resetModal" class="modal fixed inset-0 z-30 justify-center items-center">
     <div class="bg-gray-900 rounded-xl p-6 w-80 shadow-2xl text-center">
-      <h3 class="text-xl font-bold text-indigo-400 mb-4">Forgot Password</h3>
-      <input type="email" placeholder="Email Anda" class="w-full mb-3 px-3 py-2 rounded-md bg-gray-800 text-white focus:outline-none" />
-      <button class="w-full py-2 bg-gradient-to-r from-indigo-500 to-blue-500 rounded-md text-white font-semibold hover:opacity-90 mb-2">Reset Password</button>
-      <button id="closeForgot" class="mt-3 text-gray-400 hover:text-white text-sm">Tutup</button>
-    </div>
-  </div>
-
-  <!-- Modal Register -->
-  <div id="registerModal" class="modal">
-    <div class="bg-gray-900 rounded-xl p-6 w-80 shadow-2xl text-center">
-      <h3 class="text-xl font-bold text-indigo-400 mb-4">Register</h3>
-      <input type="text" placeholder="Username" class="w-full mb-3 px-3 py-2 rounded-md bg-gray-800 text-white focus:outline-none" />
-      <input type="email" placeholder="Email" class="w-full mb-3 px-3 py-2 rounded-md bg-gray-800 text-white focus:outline-none" />
-      <input type="password" placeholder="Password" class="w-full mb-3 px-3 py-2 rounded-md bg-gray-800 text-white focus:outline-none" />
-      <button class="w-full py-2 bg-gradient-to-r from-indigo-500 to-blue-500 rounded-md text-white font-semibold hover:opacity-90 mb-2">Daftar</button>
-      <button id="closeRegister" class="mt-3 text-gray-400 hover:text-white text-sm">Tutup</button>
+      <h3 class="text-xl font-bold text-indigo-400 mb-4">Reset Password</h3>
+      <input id="resetEmail" type="email" placeholder="Masukkan email" class="w-full mb-3 px-3 py-2 rounded-md bg-gray-800 text-white focus:outline-none" />
+      <button id="resetSubmit" class="w-full py-2 bg-gradient-to-r from-indigo-500 to-blue-500 rounded-md text-white font-semibold hover:opacity-90">Reset Password</button>
+      <button id="closeReset" class="mt-3 text-gray-400 hover:text-white text-sm">Tutup</button>
     </div>
   </div>
 
@@ -139,7 +123,7 @@
   <!-- Library Three.js -->
   <script src="https://cdn.jsdelivr.net/npm/three@0.150.1/build/three.min.js"></script>
   <script>
-    // Background particles
+    // Background Particle
     const scene = new THREE.Scene();
     const camera = new THREE.PerspectiveCamera(75, window.innerWidth/window.innerHeight, 0.1, 1000);
     const renderer = new THREE.WebGLRenderer({ canvas: document.getElementById("bgCanvas"), alpha:true });
@@ -161,27 +145,35 @@
 
     function animate(){requestAnimationFrame(animate);particlesMesh.rotation.y+=0.001+mouseX*0.001;particlesMesh.rotation.x+=0.0005+mouseY*0.001;renderer.render(scene,camera);}
     animate();
-
     window.addEventListener('resize', ()=>{camera.aspect=window.innerWidth/window.innerHeight;camera.updateProjectionMatrix();renderer.setSize(window.innerWidth,window.innerHeight);});
 
-    // Modal logic
-    const loginBtn=document.getElementById('loginBtn');
+    // Modal Logic
     const loginModal=document.getElementById('loginModal');
+    const resetModal=document.getElementById('resetModal');
+    const loginBtn=document.getElementById('loginBtn');
     const closeModal=document.getElementById('closeModal');
     const forgotBtn=document.getElementById('forgotBtn');
+    const closeReset=document.getElementById('closeReset');
     const registerBtn=document.getElementById('registerBtn');
-    const forgotModal=document.getElementById('forgotModal');
-    const registerModal=document.getElementById('registerModal');
-    const closeForgot=document.getElementById('closeForgot');
-    const closeRegister=document.getElementById('closeRegister');
 
     loginBtn.addEventListener('click',()=>{loginModal.classList.add('show');});
     closeModal.addEventListener('click',()=>{loginModal.classList.remove('show');});
-    forgotBtn.addEventListener('click',()=>{loginModal.classList.remove('show');forgotModal.classList.add('show');});
-    registerBtn.addEventListener('click',()=>{loginModal.classList.remove('show');registerModal.classList.add('show');});
-    closeForgot.addEventListener('click',()=>{forgotModal.classList.remove('show');});
-    closeRegister.addEventListener('click',()=>{registerModal.classList.remove('show');});
-    window.addEventListener('click',e=>{if(e.target===loginModal)loginModal.classList.remove('show');if(e.target===forgotModal)forgotModal.classList.remove('show');if(e.target===registerModal)registerModal.classList.remove('show');});
+    window.addEventListener('click',e=>{if(e.target===loginModal)loginModal.classList.remove('show');});
+
+    forgotBtn.addEventListener('click',()=>{loginModal.classList.remove('show'); resetModal.classList.add('show');});
+    closeReset.addEventListener('click',()=>{resetModal.classList.remove('show');});
+    window.addEventListener('click',e=>{if(e.target===resetModal)resetModal.classList.remove('show');});
+
+    registerBtn.addEventListener('click',()=>{alert('Fitur Register belum diimplementasikan');});
+    
+    // Demo login validasi sederhana
+    const loginSubmit = document.getElementById('loginSubmit');
+    loginSubmit.addEventListener('click',()=>{
+      const u=document.getElementById('usernameInput').value;
+      const p=document.getElementById('passwordInput').value;
+      if(u==='fengbayu@gmail.com' && p==='kakanda'){alert('Login berhasil!'); loginModal.classList.remove('show');}
+      else{alert('Username atau password salah');}
+    });
   </script>
 </body>
 </html>
