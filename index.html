@@ -9,8 +9,8 @@
     body {
       font-family: 'Poppins', sans-serif;
       background: black;
-      overflow: hidden;
       margin: 0;
+      overflow-x: hidden;
     }
     canvas {
       position: absolute;
@@ -18,21 +18,20 @@
       left: 0;
       width: 100%;
       height: 100%;
+      z-index: 0;
     }
     .modal {
-      background: rgba(0, 0, 0, 0.7);
+      background: rgba(0,0,0,0.7);
       display: none;
     }
     .modal.show {
       display: flex;
     }
     footer {
-      position: absolute;
-      bottom: 10px;
-      width: 100%;
       text-align: center;
       color: gray;
       font-size: 0.9rem;
+      padding: 10px 0;
     }
   </style>
 </head>
@@ -40,7 +39,7 @@
   <!-- Background animasi -->
   <canvas id="bgCanvas"></canvas>
 
-  <!-- Konten utama -->
+  <!-- Hero -->
   <div class="relative z-10 flex flex-col items-center justify-center h-screen text-center text-white">
     <div class="px-6 py-4 rounded-xl border border-white/30 bg-black/20 backdrop-blur-sm shadow-lg">
       <h1 class="text-5xl md:text-7xl font-bold mb-4">DSRT</h1>
@@ -50,6 +49,42 @@
       </p>
     </div>
   </div>
+
+  <!-- Section Fitur Unggulan -->
+  <section class="relative z-10 py-16 bg-gray-900">
+    <div class="max-w-7xl mx-auto px-4 text-center">
+      <h2 class="text-4xl font-bold text-white mb-4">Fitur Unggulan</h2>
+      <p class="text-gray-300 mb-12">Teknologi pintar untuk efisiensi dan performa maksimal.</p>
+
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+        <div class="bg-gray-800 rounded-2xl p-6 shadow-lg hover:shadow-xl transition">
+          <div class="text-blue-400 text-5xl mb-4">⚡</div>
+          <h3 class="text-xl font-semibold text-white mb-2">Kecepatan Tinggi</h3>
+          <p class="text-gray-400">Optimasi sistem agar semua berjalan mulus tanpa hambatan.</p>
+        </div>
+        <div class="bg-gray-800 rounded-2xl p-6 shadow-lg hover:shadow-xl transition">
+          <div class="text-green-400 text-5xl mb-4">🔒</div>
+          <h3 class="text-xl font-semibold text-white mb-2">Keamanan Tingkat Lanjut</h3>
+          <p class="text-gray-400">Proteksi data dan enkripsi menyeluruh untuk privasi Anda.</p>
+        </div>
+        <div class="bg-gray-800 rounded-2xl p-6 shadow-lg hover:shadow-xl transition">
+          <div class="text-purple-400 text-5xl mb-4">🌐</div>
+          <h3 class="text-xl font-semibold text-white mb-2">Integrasi Global</h3>
+          <p class="text-gray-400">Kompatibilitas tinggi dengan berbagai platform dan API.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Section Tentang Kami -->
+  <section class="relative z-10 py-16 bg-gray-800">
+    <div class="max-w-4xl mx-auto px-4 text-center">
+      <h2 class="text-4xl font-bold text-white mb-4">Tentang Kami</h2>
+      <p class="text-gray-300 text-lg md:text-xl">
+        DSRT hadir untuk mempermudah pengelolaan data dan keamanan digital dengan solusi cerdas yang modern. Kami berkomitmen menghadirkan teknologi terbaik untuk mendukung produktivitas dan keamanan Anda.
+      </p>
+    </div>
+  </section>
 
   <!-- Tombol Login -->
   <button id="loginBtn" class="absolute top-5 right-5 z-20 px-4 py-2 bg-gradient-to-r from-indigo-500 to-blue-500 rounded-full shadow-lg text-white font-semibold hover:scale-105 transition-all">
@@ -74,70 +109,35 @@
   <script src="https://cdn.jsdelivr.net/npm/three@0.150.1/build/three.min.js"></script>
   <script>
     const scene = new THREE.Scene();
-    const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
-    const renderer = new THREE.WebGLRenderer({ canvas: document.getElementById("bgCanvas"), alpha: true });
+    const camera = new THREE.PerspectiveCamera(75, window.innerWidth/window.innerHeight, 0.1, 1000);
+    const renderer = new THREE.WebGLRenderer({ canvas: document.getElementById("bgCanvas"), alpha:true });
     renderer.setSize(window.innerWidth, window.innerHeight);
     camera.position.z = 5;
 
     const particlesCount = 5000;
-    const positions = new Float32Array(particlesCount * 3);
-    for (let i = 0; i < particlesCount * 3; i++) {
-      positions[i] = (Math.random() - 0.5) * 10;
-    }
+    const positions = new Float32Array(particlesCount*3);
+    for(let i=0;i<particlesCount*3;i++){positions[i]=(Math.random()-0.5)*10;}
     const particlesGeometry = new THREE.BufferGeometry();
-    particlesGeometry.setAttribute('position', new THREE.BufferAttribute(positions, 3));
-    const particlesMaterial = new THREE.PointsMaterial({
-      color: 0x00ffff,
-      size: 0.05,
-      transparent: true,
-      opacity: 0.8
-    });
-    const particlesMesh = new THREE.Points(particlesGeometry, particlesMaterial);
+    particlesGeometry.setAttribute('position', new THREE.BufferAttribute(positions,3));
+    const particlesMaterial = new THREE.PointsMaterial({ color:0x00ffff,size:0.05,transparent:true,opacity:0.8});
+    const particlesMesh = new THREE.Points(particlesGeometry,particlesMaterial);
     scene.add(particlesMesh);
 
-    let mouseX = 0;
-    let mouseY = 0;
+    let mouseX=0, mouseY=0;
+    document.addEventListener('mousemove', e=>{mouseX=(e.clientX/window.innerWidth-0.5)*2;mouseY=-(e.clientY/window.innerHeight-0.5)*2;});
+    document.addEventListener('touchmove', e=>{if(e.touches.length>0){const t=e.touches[0];mouseX=(t.clientX/window.innerWidth-0.5)*2;mouseY=-(t.clientY/window.innerHeight-0.5)*2;}},{passive:true});
 
-    document.addEventListener('mousemove', (e) => {
-      mouseX = (e.clientX / window.innerWidth - 0.5) * 2;
-      mouseY = -(e.clientY / window.innerHeight - 0.5) * 2;
-    });
-
-    document.addEventListener('touchmove', (e) => {
-      if (e.touches.length > 0) {
-        const touch = e.touches[0];
-        mouseX = (touch.clientX / window.innerWidth - 0.5) * 2;
-        mouseY = -(touch.clientY / window.innerHeight - 0.5) * 2;
-      }
-    }, { passive: true });
-
-    function animate() {
-      requestAnimationFrame(animate);
-      particlesMesh.rotation.y += 0.001 + mouseX * 0.001;
-      particlesMesh.rotation.x += 0.0005 + mouseY * 0.001;
-      renderer.render(scene, camera);
-    }
+    function animate(){requestAnimationFrame(animate);particlesMesh.rotation.y+=0.001+mouseX*0.001;particlesMesh.rotation.x+=0.0005+mouseY*0.001;renderer.render(scene,camera);}
     animate();
 
-    window.addEventListener('resize', () => {
-      camera.aspect = window.innerWidth / window.innerHeight;
-      camera.updateProjectionMatrix();
-      renderer.setSize(window.innerWidth, window.innerHeight);
-    });
+    window.addEventListener('resize', ()=>{camera.aspect=window.innerWidth/window.innerHeight;camera.updateProjectionMatrix();renderer.setSize(window.innerWidth,window.innerHeight);});
 
-    const loginBtn = document.getElementById('loginBtn');
-    const loginModal = document.getElementById('loginModal');
-    const closeModal = document.getElementById('closeModal');
-
-    loginBtn.addEventListener('click', () => {
-      loginModal.classList.add('show');
-    });
-    closeModal.addEventListener('click', () => {
-      loginModal.classList.remove('show');
-    });
-    window.addEventListener('click', (e) => {
-      if (e.target === loginModal) loginModal.classList.remove('show');
-    });
+    const loginBtn=document.getElementById('loginBtn');
+    const loginModal=document.getElementById('loginModal');
+    const closeModal=document.getElementById('closeModal');
+    loginBtn.addEventListener('click',()=>{loginModal.classList.add('show');});
+    closeModal.addEventListener('click',()=>{loginModal.classList.remove('show');});
+    window.addEventListener('click',e=>{if(e.target===loginModal)loginModal.classList.remove('show');});
   </script>
 </body>
 </html>
