@@ -6,94 +6,109 @@
   <title>DSRT - Digital Smart Revise Technology</title>
   <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
   <style>
-    body {
+    body, html {
       margin: 0;
       padding: 0;
-      height: 100vh;
-      background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
+      height: 100%;
       overflow-x: hidden;
+      font-family: sans-serif;
     }
-    .background-3d {
-      position: absolute;
-      width: 100%;
-      height: 100%;
-      background: radial-gradient(circle, rgba(255,255,255,0.1) 1px, transparent 1px);
-      background-size: 40px 40px;
-      z-index: 0;
-      animation: moveBackground 20s linear infinite;
-    }
-    @keyframes moveBackground {
-      from { background-position: 0 0; }
-      to { background-position: 100% 100%; }
-    }
-    .overlay {
-      position: relative;
-      z-index: 1;
-      height: 100%;
+    .hero {
+      height: 100vh;
+      background: linear-gradient(135deg, rgba(0,0,0,0.6), rgba(0,0,0,0.4)), url('https://images.unsplash.com/photo-1504384308090-c894fdcc538d?auto=format&fit=crop&w=1920&q=80') no-repeat center center/cover;
       display: flex;
-      flex-direction: column;
-      align-items: center;
       justify-content: center;
+      align-items: center;
+      flex-direction: column;
       text-align: center;
-      color: white;
+      position: relative;
     }
-    .transparent-box {
-      border: 2px solid rgba(255, 255, 255, 0.3);
-      padding: 20px 40px;
+    .hero h1 {
+      font-size: 4rem;
+      font-weight: bold;
+      color: white;
+      border: 2px solid rgba(255,255,255,0.4);
+      padding: 10px 20px;
       border-radius: 12px;
-      background: rgba(255, 255, 255, 0.05);
-      backdrop-filter: blur(5px);
+      backdrop-filter: blur(4px);
+    }
+    .hero p {
+      font-size: 1.2rem;
+      color: #ddd;
+      margin-top: 10px;
+    }
+    .section {
+      padding: 60px 20px;
+      text-align: center;
+    }
+    .section h2 {
+      font-size: 2rem;
+      font-weight: bold;
+      margin-bottom: 20px;
+    }
+    .features-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 20px;
+      margin-top: 20px;
+    }
+    .feature-card {
+      background: white;
+      border-radius: 12px;
+      padding: 20px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    }
+    footer {
+      background: #111;
+      color: #ccc;
+      text-align: center;
+      padding: 15px 0;
+      margin-top: 30px;
+      font-size: 0.9rem;
     }
   </style>
 </head>
 <body>
   <!-- Hero Section -->
-  <div class="background-3d"></div>
-  <div class="overlay">
-    <div class="transparent-box">
-      <h1 class="text-5xl font-bold mb-4">DSRT</h1>
-      <p class="text-lg">Digital Smart Revise Technology</p>
-    </div>
-  </div>
-
-  <!-- CTA Section -->
-  <section class="relative z-10 bg-gray-900 text-white py-12 text-center">
-    <h2 class="text-3xl font-bold mb-4">Mulai Bersama DSRT Sekarang</h2>
-    <p class="mb-6 text-gray-300">Tingkatkan produktivitas dan kembangkan ide Anda dengan teknologi pintar kami.</p>
-    <button class="bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-lg shadow-lg">Daftar Sekarang</button>
+  <section class="hero">
+    <h1>DSRT</h1>
+    <p>Digital Smart Revise Technology</p>
+    <a href="#cta" class="mt-6 bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-lg shadow-lg">Mulai Sekarang</a>
   </section>
 
-  <!-- Fitur Unggulan Section -->
-  <section class="relative z-10 bg-gray-800 text-white py-16">
-    <div class="container mx-auto px-6 text-center">
-      <h2 class="text-3xl font-bold mb-8">Fitur Unggulan</h2>
-      <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-        <div class="p-6 bg-gray-700 rounded-lg shadow-md">
-          <h3 class="text-xl font-semibold mb-2">Keamanan Tinggi</h3>
-          <p class="text-gray-300">Data Anda terlindungi dengan enkripsi tingkat lanjut.</p>
-        </div>
-        <div class="p-6 bg-gray-700 rounded-lg shadow-md">
-          <h3 class="text-xl font-semibold mb-2">Integrasi Cepat</h3>
-          <p class="text-gray-300">Integrasi mudah dengan berbagai platform dan API.</p>
-        </div>
-        <div class="p-6 bg-gray-700 rounded-lg shadow-md">
-          <h3 class="text-xl font-semibold mb-2">Dukungan 24/7</h3>
-          <p class="text-gray-300">Tim kami siap membantu kapan saja.</p>
-        </div>
+  <!-- Fitur Unggulan -->
+  <section class="section bg-gray-100">
+    <h2>Fitur Unggulan</h2>
+    <div class="features-grid">
+      <div class="feature-card">
+        <h3 class="font-bold text-lg mb-2">AI Optimization</h3>
+        <p>Optimalkan proses bisnis dengan teknologi AI terbaru.</p>
+      </div>
+      <div class="feature-card">
+        <h3 class="font-bold text-lg mb-2">Cloud Integration</h3>
+        <p>Konektivitas aman dan cepat ke berbagai platform cloud.</p>
+      </div>
+      <div class="feature-card">
+        <h3 class="font-bold text-lg mb-2">Data Security</h3>
+        <p>Lindungi data sensitif dengan enkripsi tingkat tinggi.</p>
       </div>
     </div>
   </section>
 
-  <!-- Tentang Kami Section -->
-  <section class="relative z-10 bg-gray-900 text-white py-16">
-    <div class="container mx-auto px-6 text-center">
-      <h2 class="text-3xl font-bold mb-4">Tentang Kami</h2>
-      <p class="text-gray-300 max-w-2xl mx-auto">
-        DSRT adalah platform teknologi pintar yang dirancang untuk membantu bisnis dan individu
-        mengoptimalkan ide, data, dan proses kerja mereka. Dengan inovasi terbaru, kami berkomitmen
-        menghadirkan solusi yang cepat, aman, dan efisien.
-      </p>
-    </div>
+  <!-- Tentang Kami -->
+  <section class="section">
+    <h2>Tentang Kami</h2>
+    <p class="max-w-2xl mx-auto text-gray-700">
+      DSRT adalah platform inovatif yang berfokus pada pengembangan teknologi digital 
+      untuk membantu bisnis dan individu beradaptasi di era modern. Dengan layanan berbasis AI, 
+      keamanan data, dan integrasi cloud, kami hadir untuk memberikan solusi yang efektif, 
+      efisien, dan aman.
+    </p>
   </section>
+
+  <!-- Footer -->
+  <footer>
+    © DSRT 2025 All Rights Reserved
+  </footer>
 </body>
 </html>
