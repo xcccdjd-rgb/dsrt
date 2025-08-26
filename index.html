@@ -1,19 +1,232 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="id">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>DSRT Landing</title>
-  <link rel="stylesheet" href="style.css" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>DSRT - Digital Smart Revise Technology</title>
+  <style>
+    /* Reset & dasar */
+    * { margin:0; padding:0; box-sizing:border-box; font-family: Arial, sans-serif; }
+    body { background:#f8f8f8; color:#333; overflow-x:hidden; }
+    a { text-decoration:none; color:inherit; }
+    button { cursor:pointer; }
+
+    /* Navbar */
+    .navbar {
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      padding:20px 50px;
+      background: #fff;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+      position: sticky;
+      top:0;
+      z-index:1000;
+      opacity:0;
+      transform: translateY(-20px);
+      animation: fadeInTop 1s forwards 0.2s;
+    }
+    .navbar .logo { font-weight:bold; font-size:24px; color:#222; }
+    .navbar .login-btn { padding:8px 18px; border:2px solid #555; border-radius:5px; background:transparent; transition:0.3s; }
+    .navbar .login-btn:hover { background:#555; color:#fff; }
+
+    /* Pop-up login/register */
+    .popup {
+      display:none;
+      position:fixed;
+      top:0; left:0; width:100%; height:100%;
+      background: rgba(0,0,0,0.5);
+      justify-content:center;
+      align-items:center;
+      z-index:2000;
+    }
+    .popup-content {
+      background: rgba(255,255,255,0.95);
+      border:2px solid rgba(0,0,0,0.2);
+      padding:30px;
+      border-radius:10px;
+      min-width:300px;
+      max-width:400px;
+      text-align:center;
+      position: relative;
+    }
+    .popup-content h2 { margin-bottom:15px; }
+    .popup-content input {
+      width:100%; padding:10px; margin:10px 0; border:1px solid #ccc; border-radius:5px;
+    }
+    .popup-content button {
+      width:100%; padding:10px; margin-top:10px; border:none; border-radius:5px;
+      background:#222; color:#fff; font-weight:bold;
+    }
+    .popup-content .close { position:absolute; top:15px; right:20px; font-size:20px; cursor:pointer; }
+
+    /* Hero section */
+    .hero {
+      text-align:center;
+      padding:100px 20px 50px 20px;
+      background: #e0f7fa;
+      opacity:0;
+      transform: translateY(20px);
+      animation: fadeInBottom 1s forwards 0.4s;
+    }
+    .hero h1 { font-size:48px; font-weight:bold; margin-bottom:10px; }
+    .hero h3 { font-size:24px; margin-bottom:20px; color:#555; }
+    .hero p { font-size:16px; max-width:600px; margin:0 auto 30px auto; color:#666; line-height:1.6; }
+    .hero .cta-btn {
+      padding:15px 35px; font-size:16px; border:none; border-radius:8px; background:#00796b; color:#fff;
+      transition:0.3s;
+    }
+    .hero .cta-btn:hover { background:#004d40; transform: scale(1.05); }
+
+    /* Fitur Unggulan */
+    .features {
+      display:grid;
+      grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+      gap:20px;
+      padding:50px 20px;
+      text-align:center;
+      background:#fff;
+    }
+    .feature-item { display:flex; justify-content:center; opacity:0; transform: translateY(20px); }
+    .feature-box {
+      display:flex;
+      flex-direction:column;
+      align-items:center;
+      padding:20px;
+      border:2px solid rgba(0,0,0,0.2);
+      border-radius:12px;
+      background: rgba(255,255,255,0.95);
+      width:150px;
+      transition:0.3s;
+    }
+    .feature-box:hover {
+      box-shadow:0 4px 15px rgba(0,0,0,0.1);
+      transform: translateY(-5px);
+    }
+    .feature-box span { font-size:50px; margin-bottom:15px; display:block; }
+    .feature-box h4 { font-size:16px; color:#222; }
+
+    /* Tentang Kami */
+    .about-us {
+      padding:50px 20px;
+      background:#f0f4f8;
+      text-align:center;
+      opacity:0;
+      transform: translateY(20px);
+    }
+    .about-us h2 { font-size:32px; margin-bottom:20px; color:#222; }
+    .about-us p { max-width:700px; margin:0 auto; font-size:16px; color:#555; line-height:1.6; }
+
+    /* Footer */
+    .footer {
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      padding:15px 50px;
+      background:#222;
+      color:#fff;
+      opacity:0;
+      transform: translateY(20px);
+    }
+    .footer a { color:#fff; font-size:24px; text-decoration:none; }
+
+    /* Animasi */
+    @keyframes fadeInTop { to { opacity:1; transform:translateY(0); } }
+    @keyframes fadeInBottom { to { opacity:1; transform:translateY(0); } }
+
+    /* Scroll animation for features & about */
+    .animate { opacity:0; transform: translateY(20px); transition:0.8s; }
+    .animate.show { opacity:1; transform: translateY(0); }
+
+    /* Mobile stacking */
+    @media (max-width:500px) {
+      .features { grid-template-columns: 1fr; gap:15px; }
+      .feature-box { width:80%; margin:0 auto; }
+      .footer { flex-direction: column; gap:10px; }
+    }
+  </style>
 </head>
-<body class="landing">
-  <div class="center-container">
-    <h1>Welcome to DSRT</h1>
-    <p>Create & Edit like Adobe + PicsArt</p>
-    <div class="btn-group">
-      <a href="login.html" class="btn">Login</a>
-      <a href="login.html#register" class="btn secondary">Register</a>
+<body>
+
+  <!-- Navbar -->
+  <div class="navbar">
+    <div class="logo">DSRT</div>
+    <div class="login-btn" onclick="openPopup()">Login</div>
+  </div>
+
+  <!-- Pop-up Login/Register -->
+  <div class="popup" id="loginPopup">
+    <div class="popup-content">
+      <span class="close" onclick="closePopup()">&times;</span>
+      <h2>Login / Register</h2>
+      <input type="email" placeholder="Email">
+      <input type="password" placeholder="Password">
+      <button>Masuk</button>
+      <button style="background:#555; margin-top:10px;">Daftar</button>
     </div>
   </div>
+
+  <!-- Hero Section -->
+  <div class="hero">
+    <h1>DSRT</h1>
+    <h3>Digital Smart Revise Technology</h3>
+    <p>DSRT adalah platform editing foto & video berbasis AI dan manual yang memudahkan kreator menghasilkan karya profesional dengan cepat dan mudah.</p>
+    <button class="cta-btn" onclick="openPopup()">Cobalah Sekarang</button>
+  </div>
+
+  <!-- Fitur Unggulan -->
+  <div class="features">
+    <div class="feature-item animate">
+      <div class="feature-box">
+        <span>🖌</span>
+        <h4>AI Editing</h4>
+      </div>
+    </div>
+    <div class="feature-item animate">
+      <div class="feature-box">
+        <span>🎨</span>
+        <h4>Filter Profesional</h4>
+      </div>
+    </div>
+    <div class="feature-item animate">
+      <div class="feature-box">
+        <span>🗂️</span>
+        <h4>Template Kreatif</h4>
+      </div>
+    </div>
+    <div class="feature-item animate">
+      <div class="feature-box">
+        <span>☁️</span>
+        <h4>Cloud Sync</h4>
+      </div>
+    </div>
+  </div>
+
+  <!-- Tentang Kami -->
+  <div class="about-us animate">
+    <h2>Tentang Kami</h2>
+    <p>DSRT (Digital Smart Revise Technology) adalah platform editing foto & video berbasis AI dan manual, yang dirancang untuk membantu kreator dari pemula hingga profesional menghasilkan karya berkualitas dengan cepat dan mudah. Kami percaya teknologi harus mempermudah kreativitas, bukan menghalanginya.</p>
+  </div>
+
+  <!-- Footer / Bottom Bar -->
+  <div class="footer animate">
+    <span>© DSRT 2025</span>
+    <a href="https://www.instagram.com/dsrt.official.2025?igsh=aHFyeXoybXZ2ZQ==" target="_blank">📷</a>
+  </div>
+
+  <script>
+    function openPopup() { document.getElementById('loginPopup').style.display = 'flex'; }
+    function closePopup() { document.getElementById('loginPopup').style.display = 'none'; }
+
+    // Scroll animation
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        if(entry.isIntersecting) { entry.target.classList.add('show'); }
+      });
+    }, { threshold: 0.1 });
+
+    document.querySelectorAll('.animate').forEach(el => observer.observe(el));
+  </script>
+
 </body>
-</html>
+    </html>
