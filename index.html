@@ -3,79 +3,220 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Landing Page 3D Modern</title>
-  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+  <title>DSRT - Digital Smart Revise Technology</title>
   <style>
-    body {
-      font-family: 'Poppins', sans-serif;
-      background: black;
-      overflow: hidden;
+    * {
       margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Poppins', sans-serif;
     }
-    canvas {
-      position: absolute;
+
+    body, html {
+      height: 100%;
+      overflow: hidden;
+      background: #000;
+      color: #fff;
+    }
+
+    /* Canvas untuk background animasi */
+    #background {
+      position: fixed;
       top: 0;
       left: 0;
       width: 100%;
       height: 100%;
+      z-index: -1;
+    }
+
+    /* Judul DSRT */
+    .center-text {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      text-align: center;
+    }
+
+    .center-text h1 {
+      font-size: 3rem;
+      font-weight: bold;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+    }
+
+    .center-text h2 {
+      font-size: 1.2rem;
+      font-weight: 300;
+      margin-top: 10px;
+    }
+
+    /* Tombol login */
+    .login-btn {
+      position: absolute;
+      top: 20px;
+      right: 30px;
+      padding: 10px 20px;
+      background: #00c6ff;
+      background: linear-gradient(45deg, #00c6ff, #0072ff);
+      color: #fff;
+      border: none;
+      border-radius: 25px;
+      cursor: pointer;
+      font-weight: bold;
+      box-shadow: 0 0 15px rgba(0, 114, 255, 0.6);
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+
+    .login-btn:hover {
+      transform: scale(1.05);
+      box-shadow: 0 0 20px rgba(0, 114, 255, 1);
+    }
+
+    /* Popup login */
+    .modal {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.7);
+      display: none;
+      justify-content: center;
+      align-items: center;
+      z-index: 10;
+    }
+
+    .modal-content {
+      background: #1e1e1e;
+      padding: 20px 30px;
+      border-radius: 15px;
+      width: 300px;
+      text-align: center;
+      box-shadow: 0 0 20px rgba(255, 255, 255, 0.1);
+    }
+
+    .modal-content h3 {
+      margin-bottom: 20px;
+      color: #00c6ff;
+    }
+
+    .modal-content input {
+      width: 100%;
+      padding: 10px;
+      margin-bottom: 15px;
+      border: none;
+      border-radius: 8px;
+      background: #2b2b2b;
+      color: #fff;
+    }
+
+    .modal-content button {
+      width: 100%;
+      padding: 10px;
+      background: linear-gradient(45deg, #00c6ff, #0072ff);
+      color: #fff;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      font-weight: bold;
+    }
+
+    .close-btn {
+      margin-top: 10px;
+      color: #aaa;
+      font-size: 14px;
+      cursor: pointer;
+      display: inline-block;
+    }
+
+    .close-btn:hover {
+      color: #fff;
     }
   </style>
 </head>
 <body>
-  <canvas id="bgCanvas"></canvas>
-  <div class="relative z-10 flex flex-col items-center justify-center h-screen text-center text-white">
-    <h1 class="text-5xl md:text-7xl font-bold mb-4">Selamat Datang</h1>
-    <p class="text-xl md:text-2xl mb-6">Landing Page dengan Partikel 3D Futuristik</p>
-    <button class="px-6 py-3 bg-indigo-600 hover:bg-indigo-700 rounded-xl transition-all">Jelajahi</button>
+  <!-- Background Animasi -->
+  <canvas id="background"></canvas>
+
+  <!-- Judul -->
+  <div class="center-text">
+    <h1>DSRT</h1>
+    <h2>Digital Smart Revise Technology</h2>
   </div>
 
-  <script src="https://cdn.jsdelivr.net/npm/three@0.150.1/build/three.min.js"></script>
+  <!-- Tombol Login -->
+  <button class="login-btn" id="loginBtn">Login</button>
+
+  <!-- Popup Modal -->
+  <div class="modal" id="loginModal">
+    <div class="modal-content">
+      <h3>Login</h3>
+      <input type="text" placeholder="Username" />
+      <input type="password" placeholder="Password" />
+      <button>Masuk</button>
+      <span class="close-btn" id="closeModal">Tutup</span>
+    </div>
+  </div>
+
   <script>
-    const scene = new THREE.Scene();
-    const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
-    const renderer = new THREE.WebGLRenderer({ canvas: document.getElementById("bgCanvas"), alpha: true });
-    renderer.setSize(window.innerWidth, window.innerHeight);
-    camera.position.z = 5;
+    // Background animasi 3D
+    const canvas = document.getElementById('background');
+    const ctx = canvas.getContext('2d');
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
 
-    // Membuat partikel
-    const particlesCount = 5000;
-    const positions = new Float32Array(particlesCount * 3);
-    for (let i = 0; i < particlesCount * 3; i++) {
-      positions[i] = (Math.random() - 0.5) * 10;
+    let particles = [];
+    for (let i = 0; i < 100; i++) {
+      particles.push({
+        x: Math.random() * canvas.width,
+        y: Math.random() * canvas.height,
+        r: Math.random() * 3,
+        dx: (Math.random() - 0.5) * 1.5,
+        dy: (Math.random() - 0.5) * 1.5
+      });
     }
-    const particlesGeometry = new THREE.BufferGeometry();
-    particlesGeometry.setAttribute('position', new THREE.BufferAttribute(positions, 3));
 
-    const particlesMaterial = new THREE.PointsMaterial({
-      color: 0x00ffff,
-      size: 0.05,
-      transparent: true,
-      opacity: 0.8
+    function drawParticles() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      ctx.fillStyle = '#00c6ff';
+      particles.forEach(p => {
+        ctx.beginPath();
+        ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+        ctx.fill();
+
+        p.x += p.dx;
+        p.y += p.dy;
+
+        if (p.x < 0 || p.x > canvas.width) p.dx *= -1;
+        if (p.y < 0 || p.y > canvas.height) p.dy *= -1;
+      });
+      requestAnimationFrame(drawParticles);
+    }
+    drawParticles();
+
+    // Modal logic
+    const loginBtn = document.getElementById('loginBtn');
+    const loginModal = document.getElementById('loginModal');
+    const closeModal = document.getElementById('closeModal');
+
+    loginBtn.addEventListener('click', () => {
+      loginModal.style.display = 'flex';
     });
 
-    const particlesMesh = new THREE.Points(particlesGeometry, particlesMaterial);
-    scene.add(particlesMesh);
-
-    // Interaksi mouse
-    let mouseX = 0;
-    let mouseY = 0;
-    document.addEventListener('mousemove', (e) => {
-      mouseX = (e.clientX / window.innerWidth - 0.5) * 2;
-      mouseY = -(e.clientY / window.innerHeight - 0.5) * 2;
+    closeModal.addEventListener('click', () => {
+      loginModal.style.display = 'none';
     });
 
-    function animate() {
-      requestAnimationFrame(animate);
-      particlesMesh.rotation.y += 0.001 + mouseX * 0.001;
-      particlesMesh.rotation.x += 0.0005 + mouseY * 0.001;
-      renderer.render(scene, camera);
-    }
-    animate();
+    window.addEventListener('click', (e) => {
+      if (e.target === loginModal) {
+        loginModal.style.display = 'none';
+      }
+    });
 
     window.addEventListener('resize', () => {
-      camera.aspect = window.innerWidth / window.innerHeight;
-      camera.updateProjectionMatrix();
-      renderer.setSize(window.innerWidth, window.innerHeight);
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
     });
   </script>
 </body>
