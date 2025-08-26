@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Profile - DSRT</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    .accordion-content {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.4s ease, padding 0.3s ease;
+    }
+    .accordion-content.open {
+      padding-top: 1rem;
+      padding-bottom: 1rem;
+    }
+  </style>
+</head>
+<body class="bg-gray-100 text-gray-800">
+
+  <!-- Header -->
+  <header class="bg-blue-600 text-white p-4 shadow flex justify-between items-center">
+    <h1 class="text-xl font-bold">👤 Profile</h1>
+    <a href="home.html" class="bg-white text-blue-600 px-3 py-1 rounded shadow">⬅ Kembali</a>
+  </header>
+
+  <div class="max-w-3xl mx-auto p-6">
+    <div class="space-y-4">
+
+      <!-- contoh accordion pertama -->
+      <div class="border rounded-lg bg-white shadow">
+        <button onclick="toggleAccordion('editProfile')" class="w-full p-4 flex justify-between items-center font-semibold">
+          Edit Profile
+          <span id="icon-editProfile">+</span>
+        </button>
+        <div id="editProfile" class="accordion-content px-4 text-sm space-y-2">
+          <label class="block">
+            Nama Lengkap:
+            <input type="text" class="w-full border rounded p-2 mt-1" placeholder="Masukkan nama">
+          </label>
+          <label class="block">
+            Email:
+            <input type="email" class="w-full border rounded p-2 mt-1" placeholder="Masukkan email">
+          </label>
+          <button class="bg-blue-600 text-white px-4 py-2 rounded mt-2">Simpan</button>
+        </div>
+      </div>
+
+      <!-- Accordion lain: ganti password, bahasa, pusat kepercayaan, tentang kami, logout, hapus akun -->
+      <!-- (tinggal copy paste dari kode accordion sebelumnya yang sudah lengkap) -->
+
+    </div>
+  </div>
+
+  <script>
+    function toggleAccordion(id) {
+      const content = document.getElementById(id);
+      const icon = document.getElementById("icon-" + id);
+
+      if (content.classList.contains("open")) {
+        content.style.maxHeight = null;
+        content.classList.remove("open");
+        icon.textContent = "+";
+      } else {
+        content.style.maxHeight = content.scrollHeight + "px";
+        content.classList.add("open");
+        icon.textContent = "−";
+      }
+    }
+  </script>
+
+</body>
+</html>
