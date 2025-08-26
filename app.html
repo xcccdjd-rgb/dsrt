@@ -1,17 +1,26 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>DSRT Dashboard</title>
-  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="style.css" />
+  <script defer src="script.js"></script>
 </head>
-<body>
-<header><h1>DSRT Dashboard</h1></header>
-<main class="grid">
-  <a href="adobe/photos/index.html" class="card">Adobe Photos</a>
-  <a href="adobe/videos/index.html" class="card">Adobe Videos</a>
-  <a href="picsart/index.html" class="card">PicsArt</a>
-</main>
+<body class="app">
+  <header class="topbar">
+    <h1>DSRT</h1>
+    <button id="logout-btn" class="btn small">Logout</button>
+  </header>
+  <main class="center-container">
+    <h2>Adobe & PicsArt Features</h2>
+    <div class="features-grid">
+      <div class="feature-card">Adobe Photos</div>
+      <div class="feature-card">Adobe Videos</div>
+      <div class="feature-card">PicsArt Editor</div>
+      <div class="feature-card">Filters</div>
+      <div class="feature-card">Adjustments</div>
+    </div>
+  </main>
 </body>
 </html>
