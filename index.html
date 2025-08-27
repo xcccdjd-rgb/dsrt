@@ -98,13 +98,35 @@
         Instagram
       </a>
 
-      <a href="mailto:dsrtofficialai@gmail.com"
-         class="bg-blue-500 text-white px-4 py-2 rounded-xl hover:bg-blue-600">
-        Email
-      </a>
-    </div>
-  </div>
-</section>
+     <!-- Tombol Email -->
+<a id="emailButton"
+   href="#"
+   class="bg-blue-500 text-white px-4 py-2 rounded-xl hover:bg-blue-600">
+   Email
+</a>
+
+<script>
+  const email = "dsrtofficialai@gmail.com";
+  const subject = "Info DSRT";
+  const body = "Halo, saya ingin mengetahui lebih lanjut.";
+
+  const button = document.getElementById("emailButton");
+
+  button.addEventListener("click", function(e) {
+    e.preventDefault();
+
+    // Cek device
+    const isMobile = /Android|iPhone|iPad|iPod/i.test(navigator.userAgent);
+
+    if(isMobile) {
+      // Buka mailto di HP
+      window.location.href = `mailto:${email}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+    } else {
+      // Buka Gmail web di PC
+      window.open(`https://mail.google.com/mail/?view=cm&fs=1&to=${email}&su=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`, "_blank");
+    }
+  });
+</script>
   
 <!-- Footer -->
   <footer class="py-6 text-center text-gray-400 text-sm relative">
