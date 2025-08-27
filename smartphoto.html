@@ -125,7 +125,7 @@ function addThumbnail(el){
 
 // Drag + Resize + Rotate
 function makeInteractive(el){
-  let startX, startY, startWidth, startHeight, startAngle=0;
+  let startX, startY, startAngle=0;
   let isDragging=false;
 
   // Drag
@@ -155,11 +155,9 @@ function makeInteractive(el){
   el.addEventListener('wheel',e=>{
     e.preventDefault();
     if(e.shiftKey){
-      // rotate
       startAngle += e.deltaY > 0 ? 5 : -5;
       el.style.transform=`rotate(${startAngle}deg)`;
     }else{
-      // resize
       const delta = e.deltaY > 0 ? 0.95 : 1.05;
       el.style.width=(el.offsetWidth*delta)+'px';
     }
