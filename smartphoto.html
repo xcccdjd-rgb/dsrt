@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Smart Photos Pro Minimal Functional</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<style>
+body{margin:0;padding:0;font-family:sans-serif;background:#f0f2f5}
+.canvas-container{position:relative;width:100%;max-width:1200px;height:600px;margin:auto;border:2px dashed #ccc;background:#fff;overflow:hidden}
+.layer{position:absolute;cursor:move;user-select:none;touch-action:none}
+.layer.selected{outline:2px dashed #3b82f6;outline-offset:2px}
+#thumbnailBar{display:flex;overflow-x:auto;gap:8px;padding:8px 0}
+#thumbnailBar img{width:100px;height:60px;object-fit:cover;border:2px solid transparent;border-radius:4px;cursor:pointer}
+#thumbnailBar img.selected{border-color:#3b82f6}
+.accordion-button{width:100%;text-align:left;background:#e5e7eb;color:#000;padding:0.5rem 1rem;border-radius:0.375rem;margin-bottom:0.25rem;cursor:pointer;font-weight:600}
+.accordion-content{display:none;padding:0.5rem 1rem;background:#f9fafb;border:1px solid #3b82f6;border-radius:0.375rem;margin-bottom:0.5rem}
+#toolbar{display:flex;flex-wrap:wrap;gap:4px;margin-top:4px}
+#toolbar button,#toolbar select{padding:0.5rem 1rem;border-radius:0.375rem;border:none;cursor:pointer}
+@media(max-width:768px){#toolbar{overflow-x:auto;flex-wrap:nowrap}#toolbar button,#toolbar select{flex:none}}
+</style>
+</head>
+<body class="p-4">
+
+<h1 class="text-3xl font-bold mb-4 text-center">Smart Photos Pro Minimal Functional</h1>
+
+<div class="accordion">
+
+  <div>
+    <button class="accordion-button">Upload Foto</button>
+    <div class="accordion-content">
+      <button id="uploadBtn" class="bg-blue-500 text-white hover:bg-blue-600">Upload</button>
+      <input type="file" id="fileInput" multiple class="hidden">
+    </div>
+  </div>
+
+  <div>
+    <button class="accordion-button">Canvas & Layers</button>
+    <div class="accordion-content">
+      <div id="canvasContainer" class="canvas-container"></div>
+      <div id="thumbnailBar"></div>
+    </div>
+  </div>
+
+  <div>
+    <button class="accordion-button">Toolbar & Fitur</button>
+    <div class="accordion-content" id="toolbar">
+      <button id="addText" class="bg-green-500 text-white hover:bg-green-600">Text</button>
+      <button id="addSticker" class="bg-purple-500 text-white hover:bg-purple-600">Sticker</button>
+      <button id="brightness" class="bg-yellow-400 text-white hover:bg-yellow-500">Brightness</button>
+      <button id="contrast" class="bg-yellow-400 text-white hover:bg-yellow-500">Contrast</button>
+      <button id="saturation" class="bg-yellow-400 text-white hover:bg-yellow-500">Saturation</button>
+      <button id="undo" class="bg-gray-300 hover:bg-gray-400">Undo</button>
+      <button id="redo" class="bg-gray-300 hover:bg-gray-400">Redo</button>
+      <select id="resolution">
+        <option value="600">600px</option>
+        <option value="1080">1080p</option>
+        <option value="2048">2K</option>
+        <option value="3840">4K</option>
+        <option value="original">Original</option>
+      </select>
+      <button id="downloadBtn" class="bg-indigo-500 text-white hover:bg-indigo-600">Download</button>
+      <button id="backToDashboard" class="bg-gray-500 text-white hover:bg-gray-600">Back</button>
+    </div>
+  </div>
+
+</div>
+
+<script>
+// Accordion
+document.querySelectorAll('.accordion-button').forEach(btn=>{
+  btn.addEventListener('click',()=>{const content=btn.nextElementSibling;content.style.display=content.style.display==='block'?'none':'block';});
+});
+
+// Variables
+const uploadBtn=document.getElementById('uploadBtn');
+const fileInput=document.getElementById('fileInput');
+const canvasContainer=document.getElementById('canvasContainer');
+const thumbnailBar=document.getElementById('thumbnailBar');
+const addTextBtn=document.getElementById('addText');
+const addStickerBtn=document.getElementById('addSticker');
+const brightnessBtn=document.getElementById('brightness');
+const contrastBtn=document.getElementById('contrast');
+const saturationBtn=document.getElementById('saturation');
+const undoBtn=document.getElementById('undo');
+const redoBtn=document.getElementById('redo');
+const downloadBtn=document.getElementById('downloadBtn');
+const backBtn=document.getElementById('backToDashboard');
+
+let layers=[];
+
+// Upload
+uploadBtn.addEventListener('click',()=>fileInput.click());
+fileInput.addEventListener('change',handleFiles);
+function handleFiles(){
+  const files=fileInput.files;
+  Array.from(files).forEach(file=>{
+    const reader=new FileReader();
+    reader.onload=e=>{
+      const img=document.createElement('img');
+      img.src=e.target.result;
+      img.className='layer';
+      img.style.top='50px'; img.style.left='50px'; img.style.width='200px'; img.style.height='auto';
+      makeDraggableResizableRotatable(img);
+      canvasContainer.appendChild(img);
+      layers.push(img);
+      addThumbnail(img);
+    };
+    reader.readAsDataURL(file);
+  });
+}
+
+// Thumbnail
+function addThumbnail(el){
+  const thumb=document.createElement('img');
+  thumb.src=el.src||'';
+  thumb.addEventListener('click',()=>{
+    layers.forEach(l=>l.classList.remove('selected'));
+    el.classList.add('selected');
+    document.querySelectorAll('#thumbnailBar img').forEach(t=>t.classList.remove('selected'));
+    thumb.classList.add('selected');
+  });
+  thumbnailBar.appendChild(thumb);
+}
+
+// Drag + Resize + Rotate
+function makeDraggableResizableRotatable(el){
+  let startX, startY, startWidth, startHeight, startAngle=0;
+  let isDragging=false;
+
+  // Drag
+  el.addEventListener('mousedown',startDrag);
+  el.addEventListener('touchstart',startDrag);
+  function startDrag(e){
+    isDragging=true;
+    const clientX=e.touches?e.touches[0].clientX:e.clientX;
+    const clientY=e.touches?e.touches[0].clientY:e.clientY;
+    startX=clientX-el.offsetLeft; startY=clientY-el.offsetTop;
+    layers.forEach(l=>l.classList.remove('selected'));
+    el.classList.add('selected');
+  }
+  document.addEventListener('mousemove',drag);
+  document.addEventListener('touchmove',drag);
+  function drag(e){
+    if(!isDragging) return;
+    const clientX=e.touches?e.touches[0].clientX:e.clientX;
+    const clientY=e.touches?e.touches[0].clientY:e.clientY;
+    el.style.left=(clientX-startX)+'px';
+    el.style.top=(clientY-startY)+'px';
+  }
+  document.addEventListener('mouseup',()=>isDragging=false);
+  document.addEventListener('touchend',()=>isDragging=false);
+
+  // Resize & rotate placeholder (bisa dikembangkan)
+  el.addEventListener('dblclick',()=>alert('Resize/Rotate placeholder'));
+}
+
+// Basic Filters
+function applyFilter(type){
+  const selected = layers.find(l=>l.classList.contains('selected'));
+  if(!selected) return alert('Pilih layer dulu');
+  let val = prompt(`Masukkan nilai ${type} (misal 100%)`,'100%');
+  if(!val) return;
+  if(type==='brightness') selected.style.filter=`brightness(${val})`;
+  if(type==='contrast') selected.style.filter=`contrast(${val})`;
+  if(type==='saturation') selected.style.filter=`saturate(${val})`;
+}
+brightnessBtn.addEventListener('click',()=>applyFilter('brightness'));
+contrastBtn.addEventListener('click',()=>applyFilter('contrast'));
+saturationBtn.addEventListener('click',()=>applyFilter('saturation'));
+
+// Placeholder buttons
+addTextBtn.addEventListener('click',()=>alert('Add Text'));
+addStickerBtn.addEventListener('click',()=>alert('Add Sticker'));
+undoBtn.addEventListener('click',()=>alert('Undo'));
+redoBtn.addEventListener('click',()=>alert('Redo'));
+downloadBtn.addEventListener('click',()=>alert('Download'));
+
+// Back
+backBtn.addEventListener('click',()=>window.location.href='dashboard.html');
+
+</script>
+
+</body>
+</html>
