@@ -21,8 +21,16 @@
     }
   </style>
 </head>
-<body class="bg-gradient-to-br from-pink-900 via-pink-800 to-pink-700 text-white min-h-screen">
+<body class="bg-gradient-to-br from-pink-900 via-pink-800 to-pink-700 text-white min-h-screen flex flex-col">
 
+<!-- Proteksi Session -->
+<script>
+  if (!sessionStorage.getItem('loggedIn')) {
+    window.location.href = "index.html";
+  }
+</script>
+
+<!-- Background Cube Animation -->
 <script>
   const cubeCount=25;
   for(let i=0;i<cubeCount;i++){
@@ -37,29 +45,43 @@
   }
 </script>
 
-<header class="bg-blue-700/50 backdrop-blur-md text-white p-5 shadow text-center font-bold text-xl relative z-10">
-  Dashboard DSRT
+<!-- Header Tengah -->
+<header class="text-center font-bold text-2xl mt-6 relative z-10 px-4">
+  DASHBOARD DSRT
 </header>
 
-<main class="max-w-4xl mx-auto mt-12 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 relative z-10">
+<!-- Main Content (selalu vertikal) -->
+<main class="flex-grow flex items-center justify-center relative z-10 px-4">
+  <div class="flex flex-col gap-6 w-full max-w-md">
+    <a href="smartvideo.html" class="bg-white/10 backdrop-blur-lg rounded-2xl p-10 shadow hover:scale-105 transition text-center text-xl">
+      📹 Smart Video
+    </a>
+    <a href="smartphoto.html" class="bg-white/10 backdrop-blur-lg rounded-2xl p-10 shadow hover:scale-105 transition text-center text-xl">
+      🖼️ Smart Photo
+    </a>
+  </div>
+</main>
 
-  <a href="smartvideo.html" class="bg-white/10 backdrop-blur-lg rounded-2xl p-6 shadow hover:scale-105 transition text-center">
-    📹 Smart Video
+<!-- Tombol Pojok Kiri & Kanan Bawah -->
+<div class="absolute bottom-5 left-5 z-10">
+  <a href="premium.html" class="bg-yellow-500 hover:bg-yellow-600 text-black font-semibold px-5 py-2 rounded-lg shadow text-sm sm:text-base">
+    ⭐ Premium Plan
   </a>
+</div>
 
-  <a href="smartphoto.html" class="bg-white/10 backdrop-blur-lg rounded-2xl p-6 shadow hover:scale-105 transition text-center">
-    🖼️ Smart Photo
-  </a>
-
-  <a href="profile.html" class="bg-white/10 backdrop-blur-lg rounded-2xl p-6 shadow hover:scale-105 transition text-center">
+<div class="absolute bottom-5 right-5 z-10">
+  <a href="profile.html" class="bg-white/10 backdrop-blur-lg px-5 py-2 rounded-lg shadow hover:scale-105 transition text-sm sm:text-base">
     👤 Profile
   </a>
+</div>
 
-  <div class="bg-white/10 backdrop-blur-lg rounded-2xl p-6 shadow hover:scale-105 transition text-center cursor-not-allowed">
-    🎨 Smart Logo (Coming Soon)
-  </div>
-
-</main>
+<!-- Logout Function -->
+<script>
+  function logout(){
+    sessionStorage.removeItem('loggedIn');
+    window.location.href = "index.html";
+  }
+</script>
 
 </body>
 </html>
