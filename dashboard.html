@@ -3,33 +3,44 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Dashboard - DSRT</title>
+  <title>Dashboard DSRT</title>
   <script src="https://cdn.tailwindcss.com"></script>
 </head>
-<body class="bg-gray-100 min-h-screen flex flex-col">
+<body class="min-h-screen flex flex-col bg-gradient-to-b from-pink-800 to-pink-600 text-white">
 
   <!-- Header -->
-  <header class="bg-blue-600 text-white p-4 shadow">
-    <h1 class="text-xl font-bold">🏠 Dashboard DSRT</h1>
+  <header class="p-5 text-center font-bold text-xl">
+    DASHBOARD DSRT
   </header>
 
   <!-- Konten utama -->
-  <main class="flex-1 p-6">
-    <h2 class="text-lg font-semibold mb-4">Selamat Datang!</h2>
-    <p class="text-gray-700">
-      Ini adalah halaman utama setelah login.  
-      Dari sini pengguna bisa melihat aktivitas, notifikasi, atau fitur utama aplikasi.
-    </p>
+  <main class="flex-1 flex flex-col justify-center items-center space-y-6 px-6">
+    
+    <!-- Card Smart Video -->
+    <div class="w-full max-w-md bg-pink-900 rounded-2xl p-6 shadow-lg flex flex-col items-center hover:scale-105 transition">
+      <span class="text-5xl mb-3">🎬</span>
+      <h2 class="font-semibold text-lg">Smart Video</h2>
+    </div>
+
+    <!-- Card Smart Photo -->
+    <div class="w-full max-w-md bg-pink-900 rounded-2xl p-6 shadow-lg flex flex-col items-center hover:scale-105 transition">
+      <span class="text-5xl mb-3">🖼️</span>
+      <h2 class="font-semibold text-lg">Smart Photo</h2>
+    </div>
+
   </main>
 
-  <!-- Tombol bawah -->
-  <div class="fixed bottom-4 left-4">
-    <a href="#" class="bg-yellow-500 text-white px-4 py-2 rounded-full shadow-lg hover:bg-yellow-600">⭐ Premium Plan</a>
-  </div>
-
-  <div class="fixed bottom-4 right-4">
-    <a href="profile.html" class="bg-gray-800 text-white px-4 py-2 rounded-full shadow-lg hover:bg-gray-900">👤 Profile</a>
-  </div>
+  <!-- Bottom Nav -->
+  <footer class="flex justify-between p-4 bg-pink-900">
+    <a href="#" class="flex items-center space-x-2 bg-pink-500 px-4 py-2 rounded-xl shadow hover:bg-pink-400">
+      <span>⭐</span>
+      <span class="font-semibold">Premium Plan</span>
+    </a>
+    <a href="profile.html" class="flex items-center space-x-2 bg-blue-500 px-4 py-2 rounded-xl shadow hover:bg-blue-400">
+      <span>👤</span>
+      <span class="font-semibold">Saya</span>
+    </a>
+  </footer>
 
 </body>
 </html>
