@@ -1,54 +1,48 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Dashboard DSRT</title>
-  <script src="https://cdn.tailwindcss.com"></script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Dashboard DSRT</title>
+<script src="https://cdn.tailwindcss.com"></script>
 </head>
 <body class="min-h-screen flex flex-col bg-gradient-to-b from-pink-800 to-pink-600 text-white">
 
-  <!-- Header -->
-  <header class="p-5 text-center font-bold text-xl">
-    DASHBOARD DSRT
-  </header>
+<header class="p-5 text-center font-bold text-xl">DASHBOARD DSRT</header>
 
-  <!-- Konten utama -->
-  <main class="flex-1 flex flex-col justify-center items-center space-y-6 px-6">
-    
-    <!-- Card Smart Video -->
-    <div class="w-full max-w-md bg-pink-900 rounded-2xl p-6 shadow-lg flex flex-col items-center hover:scale-105 transition">
-      <span class="text-5xl mb-3">🎬</span>
-      <h2 class="font-semibold text-lg">Smart Video</h2>
-    </div>
+<main class="flex-1 flex flex-col justify-center items-center space-y-6 px-6">
 
-    <!-- Card Smart Photo -->
-<div id="smartPhotoCard" class="w-full max-w-md bg-pink-900 rounded-2xl p-6 shadow-lg flex flex-col items-center hover:scale-105 transition cursor-pointer">
-  <span class="text-5xl mb-3">🖼️</span>
-  <h2 class="font-semibold text-lg">Smart Photo</h2>
-</div>
+  <!-- Smart Video -->
+  <div id="smartVideoCard" class="w-full max-w-md bg-pink-900 rounded-2xl p-6 shadow-lg flex flex-col items-center hover:scale-105 transition cursor-pointer">
+    <h2 class="font-semibold text-lg">Smart Video</h2>
+  </div>
+
+  <!-- Smart Photo -->
+  <div id="smartPhotoCard" class="w-full max-w-md bg-pink-900 rounded-2xl p-6 shadow-lg flex flex-col items-center hover:scale-105 transition cursor-pointer">
+    <h2 class="font-semibold text-lg">Smart Photo</h2>
+  </div>
+
+  <!-- Smart Logo -->
+  <div id="smartLogoCard" class="w-full max-w-md bg-pink-900 rounded-2xl p-6 shadow-lg flex flex-col items-center hover:scale-105 transition cursor-pointer">
+    <h2 class="font-semibold text-lg">Smart Logo</h2>
+  </div>
+
+</main>
+
+<footer class="flex justify-between p-4 bg-pink-900">
+  <a href="#" class="flex items-center space-x-2 bg-pink-500 px-4 py-2 rounded-xl shadow hover:bg-pink-400">
+    <span>⭐</span><span class="font-semibold">Premium Plan</span>
+  </a>
+  <a href="profile.html" class="flex items-center space-x-2 bg-blue-500 px-4 py-2 rounded-xl shadow hover:bg-blue-400">
+    <span>👤</span><span class="font-semibold">Saya</span>
+  </a>
+</footer>
 
 <script>
-const smartPhotoCard = document.getElementById('smartPhotoCard');
-smartPhotoCard.addEventListener('click', () => {
-  // pindah ke halaman Smart Photos Pro
-  window.location.href = 'smartphotos.html';
-});
+document.getElementById('smartPhotoCard').addEventListener('click',()=>window.location.href='smartphotos.html');
+document.getElementById('smartVideoCard').addEventListener('click',()=>window.location.href='smartvideo.html');
+document.getElementById('smartLogoCard').addEventListener('click',()=>window.location.href='smartlogo.html');
 </script>
-
-  </main>
-
-  <!-- Bottom Nav -->
-  <footer class="flex justify-between p-4 bg-pink-900">
-    <a href="#" class="flex items-center space-x-2 bg-pink-500 px-4 py-2 rounded-xl shadow hover:bg-pink-400">
-      <span>⭐</span>
-      <span class="font-semibold">Premium Plan</span>
-    </a>
-    <a href="profile.html" class="flex items-center space-x-2 bg-blue-500 px-4 py-2 rounded-xl shadow hover:bg-blue-400">
-      <span>👤</span>
-      <span class="font-semibold">Saya</span>
-    </a>
-  </footer>
 
 </body>
 </html>
