@@ -23,10 +23,18 @@
     </div>
 
     <!-- Card Smart Photo -->
-    <div class="w-full max-w-md bg-pink-900 rounded-2xl p-6 shadow-lg flex flex-col items-center hover:scale-105 transition">
-      <span class="text-5xl mb-3">🖼️</span>
-      <h2 class="font-semibold text-lg">Smart Photo</h2>
-    </div>
+<div id="smartPhotoCard" class="w-full max-w-md bg-pink-900 rounded-2xl p-6 shadow-lg flex flex-col items-center hover:scale-105 transition cursor-pointer">
+  <span class="text-5xl mb-3">🖼️</span>
+  <h2 class="font-semibold text-lg">Smart Photo</h2>
+</div>
+
+<script>
+const smartPhotoCard = document.getElementById('smartPhotoCard');
+smartPhotoCard.addEventListener('click', () => {
+  // pindah ke halaman Smart Photos Pro
+  window.location.href = 'smartphotos.html';
+});
+</script>
 
   </main>
 
