@@ -1,183 +1,172 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Profile - DSRT</title>
-<script src="https://cdn.tailwindcss.com"></script>
-<style>
-  body { perspective:1000px; overflow-x:hidden; }
-  .cube{
-    position:absolute; width:60px; height:60px;
-    background: rgba(255,255,255,0.05);
-    box-shadow:0 0 20px rgba(255,255,255,0.1);
-    border:1px solid rgba(255,255,255,0.2);
-    animation: floatCube linear infinite;
-  }
-  @keyframes floatCube{
-    0% {transform: translate3d(var(--x,0), var(--y,0), var(--z,0)) rotateX(0deg) rotateY(0deg);}
-    50% {transform: translate3d(var(--x,0), calc(var(--y,0)+50px), var(--z,0)) rotateX(180deg) rotateY(180deg);}
-    100% {transform: translate3d(var(--x,0), var(--y,0), var(--z,0)) rotateX(360deg) rotateY(360deg);}
-  }
-  .accordion-content{ max-height:0; overflow:hidden; transition:max-height 0.4s ease, padding 0.3s ease;}
-  .accordion-content.open{ padding-top:1rem; padding-bottom:1rem;}
-</style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Profile - DSRT</title>
+  <script src="https://cdn.tailwindcss.com"></script>
 </head>
-<body class="bg-gradient-to-br from-pink-900 via-pink-800 to-pink-700 text-white min-h-screen">
+<body class="bg-gray-100 text-gray-800">
 
-<!-- Floating Cubes -->
-<script>
-const cubeCount=25;
-for(let i=0;i<cubeCount;i++){
-  const cube=document.createElement('div');
-  cube.className='cube';
-  cube.style.setProperty('--x',Math.random()*window.innerWidth+'px');
-  cube.style.setProperty('--y',Math.random()*window.innerHeight+'px');
-  cube.style.setProperty('--z',Math.random()*500-250+'px');
-  cube.style.animationDuration=(Math.random()*20+10)+'s';
-  cube.style.top='0'; cube.style.left='0';
-  document.body.appendChild(cube);
-}
-</script>
+  <div class="max-w-3xl mx-auto p-6">
+    <h1 class="text-2xl font-bold mb-6 text-center">👤 Profile</h1>
 
-<!-- Header -->
-<header class="bg-blue-700/50 backdrop-blur-md text-white p-4 shadow flex justify-between items-center relative z-10">
-  <h1 class="text-xl font-bold">👤 Profile</h1>
-  <a href="dashboard.html" class="bg-white text-blue-700 px-3 py-1 rounded shadow hover:bg-gray-200 transition">⬅ Kembali ke Dashboard</a>
-</header>
+    <div class="space-y-4">
 
-<div class="max-w-3xl mx-auto p-6 space-y-4 relative z-10">
-
-  <!-- Edit Profile -->
-  <div class="border rounded-lg bg-white/10 backdrop-blur-lg shadow">
-    <button onclick="toggleAccordion('editProfile')" class="w-full p-4 flex justify-between items-center font-semibold">
-      Edit Profile
-      <span id="icon-editProfile">+</span>
-    </button>
-    <div id="editProfile" class="accordion-content px-4 text-sm space-y-2">
-      <label class="block">
-        Nama Lengkap:
-        <input type="text" class="w-full border rounded p-2 mt-1 bg-gray-800 text-white" placeholder="Masukkan nama">
-      </label>
-      <label class="block">
-        Email:
-        <input type="email" class="w-full border rounded p-2 mt-1 bg-gray-800 text-white" placeholder="Masukkan email">
-      </label>
-      <button class="bg-blue-600 text-white px-4 py-2 rounded mt-2 hover:bg-blue-500 transition">Simpan</button>
-    </div>
-  </div>
-
-  <!-- Ganti Password -->
-  <div class="border rounded-lg bg-white/10 backdrop-blur-lg shadow">
-    <button onclick="toggleAccordion('password')" class="w-full p-4 flex justify-between items-center font-semibold">
-      Ganti Password
-      <span id="icon-password">+</span>
-    </button>
-    <div id="password" class="accordion-content px-4 text-sm space-y-2">
-      <input type="password" class="w-full border rounded p-2 bg-gray-800 text-white" placeholder="Password lama">
-      <input type="password" class="w-full border rounded p-2 bg-gray-800 text-white" placeholder="Password baru">
-      <input type="password" class="w-full border rounded p-2 bg-gray-800 text-white" placeholder="Konfirmasi password baru">
-      <button class="bg-blue-600 text-white px-4 py-2 rounded mt-2 hover:bg-blue-500 transition">Update</button>
-    </div>
-  </div>
-
-  <!-- Bahasa -->
-  <div class="border rounded-lg bg-white/10 backdrop-blur-lg shadow">
-    <button onclick="toggleAccordion('language')" class="w-full p-4 flex justify-between items-center font-semibold">
-      Bahasa
-      <span id="icon-language">+</span>
-    </button>
-    <div id="language" class="accordion-content px-4 text-sm space-y-2">
-      <select class="w-full border rounded p-2 bg-gray-800 text-white">
-        <option>Indonesia</option>
-        <option>English</option>
-        <option>Español</option>
-        <option>Français</option>
-        <option>Deutsch</option>
-        <option>Português</option>
-        <option>中文</option>
-        <option>日本語</option>
-        <option>한국어</option>
-        <option>العربية</option>
-      </select>
-    </div>
-  </div>
-
-  <!-- Pusat Kepercayaan -->
-  <div class="border rounded-lg bg-white/10 backdrop-blur-lg shadow">
-    <button onclick="toggleAccordion('trustCenter')" class="w-full p-4 flex justify-between items-center font-semibold">
-      Pusat Kepercayaan
-      <span id="icon-trustCenter">−</span>
-    </button>
-    <div id="trustCenter" class="accordion-content px-4 text-sm space-y-2 open" style="max-height: 1000px; padding-top:1rem; padding-bottom:1rem;">
-      <div class="border rounded-lg bg-white/5 p-3 text-xs text-gray-300">
-        <strong>Kebijakan Privasi:</strong> DSRT berkomitmen melindungi privasi pengguna. Data dikumpulkan seperlunya.
+      <!-- Edit Profile -->
+      <div class="border rounded-lg bg-white shadow">
+        <button onclick="toggleAccordion('editProfile')" class="w-full p-4 flex justify-between items-center font-semibold">
+          Edit Profile
+          <span id="icon-editProfile">+</span>
+        </button>
+        <div id="editProfile" class="hidden p-4 border-t text-sm space-y-2">
+          <label class="block">
+            Nama Lengkap:
+            <input type="text" class="w-full border rounded p-2 mt-1" placeholder="Masukkan nama">
+          </label>
+          <label class="block">
+            Email:
+            <input type="email" class="w-full border rounded p-2 mt-1" placeholder="Masukkan email">
+          </label>
+          <button class="bg-blue-600 text-white px-4 py-2 rounded mt-2">Simpan</button>
+        </div>
       </div>
-      <div class="border rounded-lg bg-white/5 p-3 text-xs text-gray-300">
-        <strong>Lisensi:</strong> Hak cipta © 2025 DSRT. Penggunaan aplikasi tunduk pada lisensi terbatas non-eksklusif.
+
+      <!-- Ganti Password -->
+      <div class="border rounded-lg bg-white shadow">
+        <button onclick="toggleAccordion('password')" class="w-full p-4 flex justify-between items-center font-semibold">
+          Ganti Password
+          <span id="icon-password">+</span>
+        </button>
+        <div id="password" class="hidden p-4 border-t text-sm space-y-2">
+          <input type="password" class="w-full border rounded p-2" placeholder="Password lama">
+          <input type="password" class="w-full border rounded p-2" placeholder="Password baru">
+          <input type="password" class="w-full border rounded p-2" placeholder="Konfirmasi password baru">
+          <button class="bg-blue-600 text-white px-4 py-2 rounded mt-2">Update</button>
+        </div>
       </div>
-      <div class="border rounded-lg bg-white/5 p-3 text-xs text-gray-300">
-        <strong>Ketentuan Layanan:</strong> Pengguna wajib menjaga keamanan akun, tidak melakukan spam, dan mematuhi aturan DSRT.
+
+      <!-- Bahasa -->
+      <div class="border rounded-lg bg-white shadow">
+        <button onclick="toggleAccordion('language')" class="w-full p-4 flex justify-between items-center font-semibold">
+          Bahasa
+          <span id="icon-language">+</span>
+        </button>
+        <div id="language" class="hidden p-4 border-t text-sm space-y-2">
+          <select class="w-full border rounded p-2">
+            <option>Indonesia</option>
+            <option>English</option>
+            <option>Español</option>
+            <option>Français</option>
+            <option>Deutsch</option>
+            <option>Português</option>
+            <option>中文</option>
+            <option>日本語</option>
+            <option>한국어</option>
+            <option>العربية</option>
+          </select>
+        </div>
       </div>
+
+      <!-- Pusat Kepercayaan -->
+      <div class="border rounded-lg bg-white shadow">
+        <button onclick="toggleAccordion('trustCenter')" class="w-full p-4 flex justify-between items-center font-semibold">
+          Pusat Kepercayaan
+          <span id="icon-trustCenter">+</span>
+        </button>
+        <div id="trustCenter" class="hidden p-4 border-t text-sm space-y-4">
+          
+          <!-- Privacy -->
+          <div class="border rounded-lg">
+            <button onclick="toggleAccordion('privacy')" class="w-full p-3 flex justify-between items-center">
+              Kebijakan Privasi
+              <span id="icon-privacy">+</span>
+            </button>
+            <div id="privacy" class="hidden p-3 border-t text-xs">
+              DSRT berkomitmen melindungi privasi pengguna dan hanya mengumpulkan data seperlunya...
+            </div>
+          </div>
+
+          <!-- License -->
+          <div class="border rounded-lg">
+            <button onclick="toggleAccordion('license')" class="w-full p-3 flex justify-between items-center">
+              Lisensi
+              <span id="icon-license">+</span>
+            </button>
+            <div id="license" class="hidden p-3 border-t text-xs">
+              Hak cipta © 2025 DSRT. Penggunaan aplikasi tunduk pada lisensi terbatas non-eksklusif...
+            </div>
+          </div>
+
+          <!-- ToS -->
+          <div class="border rounded-lg">
+            <button onclick="toggleAccordion('tos')" class="w-full p-3 flex justify-between items-center">
+              Ketentuan Layanan
+              <span id="icon-tos">+</span>
+            </button>
+            <div id="tos" class="hidden p-3 border-t text-xs">
+              Pengguna wajib menjaga keamanan akun, tidak melakukan spam, serta mematuhi aturan DSRT...
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- Tentang Kami -->
+      <div class="border rounded-lg bg-white shadow">
+        <button onclick="toggleAccordion('about')" class="w-full p-4 flex justify-between items-center font-semibold">
+          Tentang Kami
+          <span id="icon-about">+</span>
+        </button>
+        <div id="about" class="hidden p-4 border-t text-sm space-y-2">
+          <p><strong>DSRT (Digital Smart Revise Technology)</strong></p>
+          <p>Email: dsrtofficialai@gmail.com</p>
+          <p>Telepon: +62 878-3844-1426</p>
+          <p>Hak Cipta © 2025 DSRT. Semua hak dilindungi.</p>
+        </div>
+      </div>
+
+      <!-- Logout -->
+      <div class="border rounded-lg bg-white shadow">
+        <button onclick="toggleAccordion('logout')" class="w-full p-4 flex justify-between items-center font-semibold text-red-600">
+          Logout
+          <span id="icon-logout">+</span>
+        </button>
+        <div id="logout" class="hidden p-4 border-t text-sm space-y-2">
+          <p>Apakah Anda yakin ingin keluar dari akun ini?</p>
+          <button class="bg-red-600 text-white px-4 py-2 rounded">Logout</button>
+        </div>
+      </div>
+
+      <!-- Hapus Akun -->
+      <div class="border rounded-lg bg-white shadow">
+        <button onclick="toggleAccordion('delete')" class="w-full p-4 flex justify-between items-center font-semibold text-red-700">
+          Hapus Akun
+          <span id="icon-delete">+</span>
+        </button>
+        <div id="delete" class="hidden p-4 border-t text-sm space-y-2">
+          <p class="text-red-700 font-semibold">⚠️ Aksi ini permanen!</p>
+          <p>Semua data akun Anda akan dihapus dan tidak dapat dipulihkan.</p>
+          <button class="bg-red-700 text-white px-4 py-2 rounded">Hapus Akun</button>
+        </div>
+      </div>
+
     </div>
   </div>
 
-  <!-- Tentang Kami -->
-  <div class="border rounded-lg bg-white/10 backdrop-blur-lg shadow">
-    <button onclick="toggleAccordion('about')" class="w-full p-4 flex justify-between items-center font-semibold">
-      Tentang Kami
-      <span id="icon-about">+</span>
-    </button>
-    <div id="about" class="accordion-content px-4 text-sm space-y-2">
-      <p><strong>DSRT (Digital Smart Revise Technology)</strong></p>
-      <p>Email: dsrtofficialai@gmail.com</p>
-      <p>Telepon: +62 878-3844-1426</p>
-      <p>Hak Cipta © 2025 DSRT. Semua hak dilindungi.</p>
-    </div>
-  </div>
-
-  <!-- Logout -->
-  <div class="border rounded-lg bg-white/10 backdrop-blur-lg shadow">
-    <button onclick="toggleAccordion('logout')" class="w-full p-4 flex justify-between items-center font-semibold text-red-600">
-      Logout
-      <span id="icon-logout">+</span>
-    </button>
-    <div id="logout" class="accordion-content px-4 text-sm space-y-2">
-      <p>Apakah Anda yakin ingin keluar dari akun ini?</p>
-      <button class="bg-red-600 text-white px-4 py-2 rounded hover:bg-red-500 transition">Logout</button>
-    </div>
-  </div>
-
-  <!-- Hapus Akun -->
-  <div class="border rounded-lg bg-white/10 backdrop-blur-lg shadow">
-    <button onclick="toggleAccordion('delete')" class="w-full p-4 flex justify-between items-center font-semibold text-red-700">
-      Hapus Akun
-      <span id="icon-delete">+</span>
-    </button>
-    <div id="delete" class="accordion-content px-4 text-sm space-y-2">
-      <p class="text-red-700 font-semibold">⚠️ Aksi ini permanen!</p>
-      <p>Semua data akun Anda akan dihapus dan tidak dapat dipulihkan.</p>
-      <button class="bg-red-700 text-white px-4 py-2 rounded hover:bg-red-600 transition">Hapus Akun</button>
-    </div>
-  </div>
-
-</div>
-
-<script>
-function toggleAccordion(id){
-  const content=document.getElementById(id);
-  const icon=document.getElementById("icon-"+id);
-  if(content.classList.contains("open")){
-    content.style.maxHeight=null;
-    content.classList.remove("open");
-    icon.textContent="+";
-  }else{
-    content.style.maxHeight=content.scrollHeight+"px";
-    content.classList.add("open");
-    icon.textContent="−";
-  }
-}
-</script>
+  <script>
+    function toggleAccordion(id) {
+      const content = document.getElementById(id);
+      const icon = document.getElementById("icon-" + id);
+      if (content.classList.contains("hidden")) {
+        content.classList.remove("hidden");
+        icon.textContent = "−";
+      } else {
+        content.classList.add("hidden");
+        icon.textContent = "+";
+      }
+    }
+  </script>
 
 </body>
 </html>
