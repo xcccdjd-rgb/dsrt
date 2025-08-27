@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Login - DSRT</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gradient-to-br from-pink-900 via-pink-800 to-pink-700 min-h-screen flex items-center justify-center text-white">
+
+  <!-- Modal Box -->
+  <div class="bg-white/10 backdrop-blur-lg p-8 rounded-2xl shadow-2xl w-full max-w-sm">
+    <h1 class="text-center text-2xl font-bold mb-6">DSRT</h1>
+
+    <!-- Login Form -->
+    <div id="loginForm">
+      <input type="email" placeholder="Email"
+        class="w-full mb-4 px-3 py-2 rounded-lg border border-transparent bg-gray-100/40 focus:bg-white/80 focus:ring-2 focus:ring-pink-500 text-black outline-none">
+      <input type="password" placeholder="Password"
+        class="w-full mb-4 px-3 py-2 rounded-lg border border-transparent bg-gray-100/40 focus:bg-white/80 focus:ring-2 focus:ring-pink-500 text-black outline-none">
+      <button onclick="window.location.href='dashboard.html'"
+        class="w-full bg-pink-600 hover:bg-pink-700 py-2 rounded-lg font-bold mb-4">Login</button>
+
+      <div class="flex justify-between text-sm">
+        <button onclick="showReset()" class="underline">Forgot Password</button>
+        <button onclick="showRegister()" class="underline">Register</button>
+      </div>
+      <div class="mt-4 text-center">
+        <a href="index.html" class="text-xs underline">Tutup</a>
+      </div>
+    </div>
+
+    <!-- Register Form -->
+    <div id="registerForm" class="hidden">
+      <input type="email" placeholder="Email"
+        class="w-full mb-4 px-3 py-2 rounded-lg border border-transparent bg-gray-100/40 focus:bg-white/80 focus:ring-2 focus:ring-pink-500 text-black outline-none">
+      <input type="password" placeholder="Password"
+        class="w-full mb-4 px-3 py-2 rounded-lg border border-transparent bg-gray-100/40 focus:bg-white/80 focus:ring-2 focus:ring-pink-500 text-black outline-none">
+      <button class="w-full bg-green-600 hover:bg-green-700 py-2 rounded-lg font-bold mb-4">Register</button>
+
+      <div class="text-center">
+        <button onclick="showLogin()" class="underline text-sm">Kembali ke Login</button>
+      </div>
+    </div>
+
+    <!-- Reset Password Form -->
+    <div id="resetForm" class="hidden">
+      <input type="email" placeholder="Email"
+        class="w-full mb-4 px-3 py-2 rounded-lg border border-transparent bg-gray-100/40 focus:bg-white/80 focus:ring-2 focus:ring-pink-500 text-black outline-none">
+      <button class="w-full bg-yellow-600 hover:bg-yellow-700 py-2 rounded-lg font-bold mb-4">Reset Password</button>
+
+      <div class="text-center">
+        <button onclick="showLogin()" class="underline text-sm">Kembali ke Login</button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    function showRegister(){
+      document.getElementById('loginForm').classList.add('hidden');
+      document.getElementById('resetForm').classList.add('hidden');
+      document.getElementById('registerForm').classList.remove('hidden');
+    }
+    function showReset(){
+      document.getElementById('loginForm').classList.add('hidden');
+      document.getElementById('registerForm').classList.add('hidden');
+      document.getElementById('resetForm').classList.remove('hidden');
+    }
+    function showLogin(){
+      document.getElementById('registerForm').classList.add('hidden');
+      document.getElementById('resetForm').classList.add('hidden');
+      document.getElementById('loginForm').classList.remove('hidden');
+    }
+  </script>
+</body>
+</html>
