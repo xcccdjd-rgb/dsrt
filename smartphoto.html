@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Smart Photos Pro Minimal Functional</title>
+<title>Smart Photos Pro Interactive</title>
 <script src="https://cdn.tailwindcss.com"></script>
 <style>
 body{margin:0;padding:0;font-family:sans-serif;background:#f0f2f5}
@@ -22,7 +22,7 @@ body{margin:0;padding:0;font-family:sans-serif;background:#f0f2f5}
 </head>
 <body class="p-4">
 
-<h1 class="text-3xl font-bold mb-4 text-center">Smart Photos Pro Minimal Functional</h1>
+<h1 class="text-3xl font-bold mb-4 text-center">Smart Photos Pro Interactive</h1>
 
 <div class="accordion">
 
@@ -101,7 +101,7 @@ function handleFiles(){
       img.src=e.target.result;
       img.className='layer';
       img.style.top='50px'; img.style.left='50px'; img.style.width='200px'; img.style.height='auto';
-      makeDraggableResizableRotatable(img);
+      makeInteractive(img);
       canvasContainer.appendChild(img);
       layers.push(img);
       addThumbnail(img);
@@ -124,7 +124,7 @@ function addThumbnail(el){
 }
 
 // Drag + Resize + Rotate
-function makeDraggableResizableRotatable(el){
+function makeInteractive(el){
   let startX, startY, startWidth, startHeight, startAngle=0;
   let isDragging=false;
 
@@ -151,8 +151,19 @@ function makeDraggableResizableRotatable(el){
   document.addEventListener('mouseup',()=>isDragging=false);
   document.addEventListener('touchend',()=>isDragging=false);
 
-  // Resize & rotate placeholder (bisa dikembangkan)
-  el.addEventListener('dblclick',()=>alert('Resize/Rotate placeholder'));
+  // Resize / Rotate via wheel & shift+wheel
+  el.addEventListener('wheel',e=>{
+    e.preventDefault();
+    if(e.shiftKey){
+      // rotate
+      startAngle += e.deltaY > 0 ? 5 : -5;
+      el.style.transform=`rotate(${startAngle}deg)`;
+    }else{
+      // resize
+      const delta = e.deltaY > 0 ? 0.95 : 1.05;
+      el.style.width=(el.offsetWidth*delta)+'px';
+    }
+  });
 }
 
 // Basic Filters
@@ -170,11 +181,11 @@ contrastBtn.addEventListener('click',()=>applyFilter('contrast'));
 saturationBtn.addEventListener('click',()=>applyFilter('saturation'));
 
 // Placeholder buttons
-addTextBtn.addEventListener('click',()=>alert('Add Text'));
-addStickerBtn.addEventListener('click',()=>alert('Add Sticker'));
-undoBtn.addEventListener('click',()=>alert('Undo'));
-redoBtn.addEventListener('click',()=>alert('Redo'));
-downloadBtn.addEventListener('click',()=>alert('Download'));
+addTextBtn.addEventListener('click',()=>alert('Add Text placeholder'));
+addStickerBtn.addEventListener('click',()=>alert('Add Sticker placeholder'));
+undoBtn.addEventListener('click',()=>alert('Undo placeholder'));
+redoBtn.addEventListener('click',()=>alert('Redo placeholder'));
+downloadBtn.addEventListener('click',()=>alert('Download placeholder'));
 
 // Back
 backBtn.addEventListener('click',()=>window.location.href='dashboard.html');
