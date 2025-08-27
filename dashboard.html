@@ -1,87 +1,52 @@
-<!DOCTYPE html>
-<html lang="id">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Dashboard - DSRT</title>
-  <script src="https://cdn.tailwindcss.com"></script>
-  <style>
-    body { perspective:1000px; overflow-x:hidden; }
-    .cube {
-      position:absolute; width:60px; height:60px;
-      background: rgba(255,255,255,0.05);
-      box-shadow:0 0 20px rgba(255,255,255,0.1);
-      border:1px solid rgba(255,255,255,0.2);
-      animation: floatCube linear infinite;
-    }
-    @keyframes floatCube {
-      0% {transform: translate3d(var(--x,0), var(--y,0), var(--z,0)) rotateX(0deg) rotateY(0deg);}
-      50% {transform: translate3d(var(--x,0), calc(var(--y,0)+50px), var(--z,0)) rotateX(180deg) rotateY(180deg);}
-      100% {transform: translate3d(var(--x,0), var(--y,0), var(--z,0)) rotateX(360deg) rotateY(360deg);}
-    }
-  </style>
-</head>
-<body class="bg-gradient-to-br from-pink-900 via-pink-800 to-pink-700 text-white min-h-screen flex flex-col">
+<body>
+  <!-- Background animasi -->
+  <canvas id="bgCanvas"></canvas>
 
-<!-- Proteksi Session -->
-<script>
-  if (!sessionStorage.getItem('loggedIn')) {
-    window.location.href = "index.html";
-  }
-</script>
+  <!-- Dashboard Content -->
+  <div class="relative z-10 min-h-screen p-6 text-white">
+    <h1 class="text-3xl font-bold mb-6">Dashboard</h1>
 
-<!-- Background Cube Animation -->
-<script>
-  const cubeCount=25;
-  for(let i=0;i<cubeCount;i++){
-    const cube=document.createElement('div');
-    cube.className='cube';
-    cube.style.setProperty('--x',Math.random()*window.innerWidth+'px');
-    cube.style.setProperty('--y',Math.random()*window.innerHeight+'px');
-    cube.style.setProperty('--z',Math.random()*500-250+'px');
-    cube.style.animationDuration=(Math.random()*20+10)+'s';
-    cube.style.top='0'; cube.style.left='0';
-    document.body.appendChild(cube);
-  }
-</script>
-
-<!-- Header Tengah -->
-<header class="text-center font-bold text-2xl mt-6 relative z-10 px-4">
-  DASHBOARD DSRT
-</header>
-
-<!-- Main Content (selalu vertikal) -->
-<main class="flex-grow flex items-center justify-center relative z-10 px-4">
-  <div class="flex flex-col gap-6 w-full max-w-md">
-    <a href="smartvideo.html" class="bg-white/10 backdrop-blur-lg rounded-2xl p-10 shadow hover:scale-105 transition text-center text-xl">
-      📹 Smart Video
-    </a>
-    <a href="smartphoto.html" class="bg-white/10 backdrop-blur-lg rounded-2xl p-10 shadow hover:scale-105 transition text-center text-xl">
-      🖼️ Smart Photo
-    </a>
+    <!-- Grid Menu -->
+    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
+      <div class="bg-white/10 backdrop-blur-lg rounded-2xl p-6 shadow-lg hover:scale-105 transition cursor-pointer">
+        <h2 class="text-xl font-semibold">📹 Smart Video</h2>
+        <p class="text-gray-300 text-sm">Edit manual dengan CapCut.</p>
+      </div>
+      <div class="bg-white/10 backdrop-blur-lg rounded-2xl p-6 shadow-lg hover:scale-105 transition cursor-pointer">
+        <h2 class="text-xl font-semibold">🖼️ Smart Photos</h2>
+        <p class="text-gray-300 text-sm">Edit manual dengan Adobe, Picsart, Snapseed, dll.</p>
+      </div>
+      <div class="bg-white/10 backdrop-blur-lg rounded-2xl p-6 shadow-lg hover:scale-105 transition cursor-pointer">
+        <h2 class="text-xl font-semibold">👤 Profile</h2>
+        <p class="text-gray-300 text-sm">Data akun, license, kebijakan, dll.</p>
+      </div>
+    </div>
   </div>
-</main>
 
-<!-- Tombol Pojok Kiri & Kanan Bawah -->
-<div class="absolute bottom-5 left-5 z-10">
-  <a href="premium.html" class="bg-yellow-500 hover:bg-yellow-600 text-black font-semibold px-5 py-2 rounded-lg shadow text-sm sm:text-base">
-    ⭐ Premium Plan
-  </a>
-</div>
+  <!-- Script animasi background sama persis -->
+  <script src="https://cdn.jsdelivr.net/npm/three@0.150.1/build/three.min.js"></script>
+  <script>
+    const scene = new THREE.Scene();
+    const camera = new THREE.PerspectiveCamera(75, window.innerWidth/window.innerHeight, 0.1, 1000);
+    const renderer = new THREE.WebGLRenderer({ canvas: document.getElementById("bgCanvas"), alpha:true });
+    renderer.setSize(window.innerWidth, window.innerHeight);
+    camera.position.z = 5;
 
-<div class="absolute bottom-5 right-5 z-10">
-  <a href="profile.html" class="bg-white/10 backdrop-blur-lg px-5 py-2 rounded-lg shadow hover:scale-105 transition text-sm sm:text-base">
-    👤 Profile
-  </a>
-</div>
+    const particlesCount = 5000;
+    const positions = new Float32Array(particlesCount*3);
+    for(let i=0;i<particlesCount*3;i++){positions[i]=(Math.random()-0.5)*10;}
+    const particlesGeometry = new THREE.BufferGeometry();
+    particlesGeometry.setAttribute('position', new THREE.BufferAttribute(positions,3));
+    const particlesMaterial = new THREE.PointsMaterial({ color:0x00ffff,size:0.05,transparent:true,opacity:0.8});
+    const particlesMesh = new THREE.Points(particlesGeometry,particlesMaterial);
+    scene.add(particlesMesh);
 
-<!-- Logout Function -->
-<script>
-  function logout(){
-    sessionStorage.removeItem('loggedIn');
-    window.location.href = "index.html";
-  }
-</script>
+    let mouseX=0, mouseY=0;
+    document.addEventListener('mousemove', e=>{mouseX=(e.clientX/window.innerWidth-0.5)*2;mouseY=-(e.clientY/window.innerHeight-0.5)*2;});
+    document.addEventListener('touchmove', e=>{if(e.touches.length>0){const t=e.touches[0];mouseX=(t.clientX/window.innerWidth-0.5)*2;mouseY=-(t.clientY/window.innerHeight-0.5)*2;}},{passive:true});
 
+    function animate(){requestAnimationFrame(animate);particlesMesh.rotation.y+=0.001+mouseX*0.001;particlesMesh.rotation.x+=0.0005+mouseY*0.001;renderer.render(scene,camera);}
+    animate();
+    window.addEventListener('resize', ()=>{camera.aspect=window.innerWidth/window.innerHeight;camera.updateProjectionMatrix();renderer.setSize(window.innerWidth,window.innerHeight);});
+  </script>
 </body>
-</html>
