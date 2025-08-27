@@ -5,25 +5,55 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Dashboard DSRT</title>
 <script src="https://cdn.tailwindcss.com"></script>
+<style>
+.card {
+  width: 100%;
+  max-width: 360px;
+  background: #9d174d;
+  border-radius: 1rem;
+  padding: 1.5rem;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  cursor: pointer;
+  transition: transform 0.3s;
+}
+.card:hover { transform: scale(1.05); }
+.card svg { width: 60px; height: 60px; margin-bottom: 1rem; fill: white; }
+</style>
 </head>
 <body class="min-h-screen flex flex-col bg-gradient-to-b from-pink-800 to-pink-600 text-white">
 
-<header class="p-5 text-center font-bold text-xl">DASHBOARD DSRT</header>
+<header class="p-5 text-center font-bold text-2xl">DASHBOARD DSRT</header>
 
 <main class="flex-1 flex flex-col justify-center items-center space-y-6 px-6">
 
   <!-- Smart Video -->
-  <div id="smartVideoCard" class="w-full max-w-md bg-pink-900 rounded-2xl p-6 shadow-lg flex flex-col items-center hover:scale-105 transition cursor-pointer">
+  <div id="smartVideoCard" class="card">
+    <!-- SVG Icon Video -->
+    <svg viewBox="0 0 24 24">
+      <path d="M10 16.5l6-4.5-6-4.5v9z"/>
+      <path d="M21 5v14H3V5h18m0-2H3c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h18c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2z"/>
+    </svg>
     <h2 class="font-semibold text-lg">Smart Video</h2>
   </div>
 
   <!-- Smart Photo -->
-  <div id="smartPhotoCard" class="w-full max-w-md bg-pink-900 rounded-2xl p-6 shadow-lg flex flex-col items-center hover:scale-105 transition cursor-pointer">
+  <div id="smartPhotoCard" class="card">
+    <!-- SVG Icon Photo -->
+    <svg viewBox="0 0 24 24">
+      <path d="M21 19V5c0-1.1-.9-2-2-2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2zM5 5h14v10l-4-4-6 6-4-4V5z"/>
+    </svg>
     <h2 class="font-semibold text-lg">Smart Photo</h2>
   </div>
 
   <!-- Smart Logo -->
-  <div id="smartLogoCard" class="w-full max-w-md bg-pink-900 rounded-2xl p-6 shadow-lg flex flex-col items-center hover:scale-105 transition cursor-pointer">
+  <div id="smartLogoCard" class="card">
+    <!-- SVG Icon Logo -->
+    <svg viewBox="0 0 24 24">
+      <path d="M12 2L2 7l10 5 10-5-10-5zm0 6v14l-8-4V8l8 4z"/>
+    </svg>
     <h2 class="font-semibold text-lg">Smart Logo</h2>
   </div>
 
